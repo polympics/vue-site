@@ -40,7 +40,6 @@ export default class Account extends Vue {
             }
             return;
         }
-        console.log(account);
         this.account = account;
     }
 }

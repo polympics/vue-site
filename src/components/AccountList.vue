@@ -1,5 +1,7 @@
 <template lang="pug">
 table(class='account_list')
+    tr(class='account_list__header')
+        th(colspan='3') Polympics Members
     tr(class='account_list__row', v-for='account in accounts')
         td(class='account_list__row__pfp')
             img(:src='account.avatarUrl', alt='Pfp')
@@ -9,6 +11,8 @@ table(class='account_list')
         td(class='account_list__row__team')
             a(href='#', v-if='account.team') {{ account.team.name }}
             p(href='#', v-else) 🏳️‍🌈 No team
+    tr(class='account_list_placeholder', v-if='!accounts.length')
+        td There's nothing here!
 </template>
 
 <script lang="ts">
@@ -32,16 +36,12 @@ export default class AccountList extends Vue {
     }
 
     async fetchAccounts() {
-        console.log('hiiii');
-        console.log(document.body.scrollTop, document.body.offsetHeight);
-        console.log(this.$el.clientHeight, this.$el.clientTop, this.$el.scrollTop, this.$el.scrollHeight)
         if (this.finished) return;
         const accounts = await this.accountPaginator.nextPage();
         if (!accounts.length) {
             this.finished = true;
             return;
         }
-        console.log(this.finished, accounts);
         this.accounts.push(...accounts);
     }
 }
@@ -60,6 +60,18 @@ export default class AccountList extends Vue {
     border-spacing: 0 1rem
     a
         color: $body-link
+
+.account_list__header th
+    font-size: 2rem
+
+.account_list_placeholder
+    background: $bubble-bg
+    width: calc(100% - 8rem)
+    margin: 2rem
+    padding: 2rem
+    border-radius: 2rem
+    font-weight: 800
+    text-align: center
 
 .account_list__row
     padding: 1rem 0

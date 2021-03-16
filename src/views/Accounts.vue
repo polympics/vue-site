@@ -11,12 +11,8 @@ import AccountList from "@/components/AccountList.vue";
 declare const polympics: any;
 const client = new polympics.UnauthenticatedClient();
 
-@Component({
-    components: {
-        AccountList
-    }
-})
+@Component({ components: { AccountList } })
 export default class Accounts extends Vue {
-    accounts = client.listAccounts();
+  accounts = client.listAccounts();
 }
 </script>
