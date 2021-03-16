@@ -12,7 +12,7 @@ main(class='account')
 
 <script lang="ts">
 export default {
-  props: ["account"]
+    props: ["account"]
 };
 </script>
 

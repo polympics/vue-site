@@ -20,19 +20,20 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class AccountList extends Vue {
+    // eslint-disable-next-line
     accounts: Array<Record<string, any>> = [];
     finished = false;
-    // eslint-disable-next-line
     @Prop()
+    // eslint-disable-next-line
     accountPaginator: any;
 
     mounted() {
         this.fetchAccounts();
-        window.addEventListener('scroll', this.fetchAccounts);
+        window.addEventListener("scroll", this.fetchAccounts);
     }
 
-    destroyed () {
-        window.removeEventListener('scroll', this.fetchAccounts);
+    destroyed() {
+        window.removeEventListener("scroll", this.fetchAccounts);
     }
 
     async fetchAccounts() {

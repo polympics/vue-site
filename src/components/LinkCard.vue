@@ -9,7 +9,7 @@ router-link(class='card_item', :to='link')
 
 <script lang="ts">
 export default {
-  props: ["link", "title"]
+    props: ["link", "title"]
 };
 </script>
 

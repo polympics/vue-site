@@ -9,17 +9,17 @@ import PageNotFound from "../views/PageNotFound.vue";
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
-  { path: "/", name: "Index", component: Index },
-  { path: "/about", name: "About", component: About },
-  { path: "/accounts", name: "Accounts", component: Accounts },
-  { path: "/account/:id", name: "Account", component: Account },
-  { path: "**", name: "PageNotFound", component: PageNotFound}
+    { path: "/", name: "Index", component: Index },
+    { path: "/about", name: "About", component: About },
+    { path: "/accounts", name: "Accounts", component: Accounts },
+    { path: "/account/:id", name: "Account", component: Account },
+    { path: "**", name: "PageNotFound", component: PageNotFound }
 ];
 
 const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes
+    mode: "history",
+    base: process.env.BASE_URL,
+    routes
 });
 
 export default router;

@@ -13,6 +13,6 @@ const client = new polympics.UnauthenticatedClient();
 
 @Component({ components: { AccountList } })
 export default class Accounts extends Vue {
-  accounts = client.listAccounts();
+    accounts = client.listAccounts();
 }
 </script>

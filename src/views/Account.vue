@@ -17,11 +17,12 @@ const client = new polympics.UnauthenticatedClient();
     }
 })
 export default class Account extends Vue {
+    // eslint-disable-next-line
     account: Record<string, any> = {
-        name: 'Loading...',
-        discriminator: '0000',
+        name: "Loading...",
+        discriminator: "0000",
         team: {
-            name: 'Loading...'
+            name: "Loading..."
         }
     };
 
@@ -34,9 +35,9 @@ export default class Account extends Vue {
         let account;
         try {
             account = await client.getAccount(id);
-        } catch(error) {
+        } catch (error) {
             if (error.code === 422) {
-                window.location.href = '/404';
+                window.location.href = "/404";
             }
             return;
         }

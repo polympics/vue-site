@@ -19,9 +19,9 @@ import { Component, Vue } from "vue-property-decorator";
 import LinkCard from "@/components/LinkCard.vue";
 
 @Component({
-  components: {
-    LinkCard
-  }
+    components: {
+        LinkCard
+    }
 })
 export default class Index extends Vue {}
 </script>
