@@ -14,7 +14,7 @@ main(class='main main--centered')
     | We have an event to suit everyone and the Polympics. View the full list here.
 </template>
 
-<script lang="ts">
+<script>
 import { Component, Vue } from "vue-property-decorator";
 import LinkCard from "@/components/LinkCard.vue";
 

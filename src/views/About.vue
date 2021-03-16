@@ -22,7 +22,7 @@ main(class='main')
     p(class='page_content__p') as an evolutionary advantage as a signalling mechanism of reassurance between mother cats and nursing kittens. Post-nursing cats often purr as a sign of contentment: when being petted, becoming relaxed.
 </template>
 
-<script lang="ts">
+<script>
 import { Component, Vue } from "vue-property-decorator";
 
 @Component

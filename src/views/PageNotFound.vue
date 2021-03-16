@@ -6,7 +6,7 @@ main(class='main main--centered')
     p(class='page_intro__description') Couldn't find that page.
 </template>
 
-<script lang="ts">
+<script>
 import { Component, Vue } from "vue-property-decorator";
 
 @Component

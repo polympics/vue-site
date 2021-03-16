@@ -15,17 +15,17 @@ table(class='account_list')
         td There's nothing here!
 </template>
 
-<script lang="ts">
+<script>
 import { Component, Prop, Vue } from "vue-property-decorator";
+
+Component.registerHooks(["beforeRouteEnter"]);
 
 @Component
 export default class AccountList extends Vue {
-    // eslint-disable-next-line
-    accounts: Array<Record<string, any>> = [];
+    accounts = [];
     finished = false;
     @Prop()
-    // eslint-disable-next-line
-    accountPaginator: any;
+    accountPaginator;
 
     mounted() {
         this.fetchAccounts();
@@ -34,6 +34,12 @@ export default class AccountList extends Vue {
 
     destroyed() {
         window.removeEventListener("scroll", this.fetchAccounts);
+    }
+
+    beforeRouteEnter(_to, _from, next) {
+        next(vm => {
+            vm.fetchAccounts();
+        });
     }
 
     async fetchAccounts() {

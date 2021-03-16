@@ -102,7 +102,7 @@ body
     width: 20vw
 </style>
 
-<script lang="ts">
+<script>
 import { Component, Vue } from "vue-property-decorator";
 import NavBar from "@/components/NavBar.vue";
 import Footer from "@/components/Footer.vue";

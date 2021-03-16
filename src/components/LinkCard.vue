@@ -7,7 +7,7 @@ router-link(class='card_item', :to='link')
   i(class='fas fa-arrow-right card_item__arrow')
 </template>
 
-<script lang="ts">
+<script>
 export default {
     props: ["link", "title"]
 };

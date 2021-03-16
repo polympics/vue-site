@@ -3,12 +3,11 @@ main(class='main main--centered')
   ProfileCard(:account='account')
 </template>
 
-<script lang="ts">
+<script>
 import { Component, Vue } from "vue-property-decorator";
 import ProfileCard from "@/components/ProfileCard.vue";
 
 // eslint-disable-next-line
-declare const polympics: any;
 const client = new polympics.UnauthenticatedClient();
 
 @Component({
@@ -17,8 +16,7 @@ const client = new polympics.UnauthenticatedClient();
     }
 })
 export default class Account extends Vue {
-    // eslint-disable-next-line
-    account: Record<string, any> = {
+    account = {
         name: "Loading...",
         discriminator: "0000",
         team: {

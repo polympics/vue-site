@@ -10,7 +10,7 @@ main(class='account')
     a(class='account__link', href="#") Manage Account
 </template>
 
-<script lang="ts">
+<script>
 export default {
     props: ["account"]
 };
