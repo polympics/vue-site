@@ -1,13 +1,15 @@
 <template lang="pug">
-main(class='account')
-  img(:src='account.avatarUrl', alt="Profile Picture", class='account__pfp')
-  div(class='account__details')
-    h1(class='account__name') {{ account.name }}
-      span(class='account__discrim') !{'#'}{{ account.discriminator}}
-    a(class='account__team', href="#", v-if='account.team')
+main.account
+  img.account__pfp(
+      :src='account.avatarUrl + "?size=256"',
+      alt='Profile Picture')
+  .account__details
+    h1.account__name {{ account.name }}
+      span.account__discrim !{'#'}{{ account.discriminator}}
+    a.account__team(href='#', v-if='account.team')
       | {{ account.team.name }}
-    span(class='account__team account__team--none', v-else) 🏳️‍🌈 No team
-    a(class='account__link', href="#") Manage Account
+    span.account__team.account__team--none(v-else) 🏳️‍🌈 No team
+    a.account__link(href="#") Manage Account
 </template>
 
 <script>
@@ -28,6 +30,7 @@ export default {
   border-radius: 2rem
   height: 10rem
   z-index: 1
+  background: $accent-gradient
 
 .account__details
     display: flex

@@ -1,24 +1,50 @@
 <template lang="pug">
   div(class='body')
-    NavBar
-    router-view
+    NavBar(:account='account')
+    transition(name='slide_transition', mode='out-in')
+      router-view(@reloadNavbar='getAccount')
     Footer
 </template>
 
 <style lang="sass">
 @import './sass/_variables.sass'
 
+.slide_transition-leave
+  left: 0
+  position: absolute
+
+.slide_transition-leave-active
+  transition: left 0.25s
+
+.slide_transition-leave-to
+  position: absolute
+  left: 100vw
+
+.slide_transition-enter
+  left: -100vw
+  position: absolute
+
+.slide_transition-enter-active
+  transition: left 0.25s
+
+.slide_transition-enter-to
+  position: absolute
+  left: 0
+
 body
   background: $body-bg
   color: $body-text
   margin: 0
   font-family: $theme-font
+  overflow-x: hidden
 
 .main
   display: flex
   flex-direction: column
   align-items: flex-start
   position: relative
+  width: calc(100vw - 20px)
+  min-height: calc(100vh - 8.5rem)
 
 .page_intro
   display: flex
@@ -108,5 +134,20 @@ import NavBar from "@/components/NavBar.vue";
 import Footer from "@/components/Footer.vue";
 
 @Component({ components: { NavBar, Footer } })
-export default class App extends Vue {}
+export default class App extends Vue {
+    account = null;
+
+    mounted() {
+        this.getAccount();
+    }
+
+    async getAccount() {
+        const client = common.getClient(process.env.VUE_APP_API_URL);
+        if (client.getSelf) {
+            this.account = await client.getSelf();
+        } else {
+            this.account = null;
+        }
+    }
+}
 </script>

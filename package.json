@@ -1,6 +1,6 @@
 {
   "name": "polympics-web-vue",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Vue frontend for the Polympics API.",
   "repository": {
     "type": "git",
@@ -9,7 +9,7 @@
   "author": "Artemis",
   "license": "MIT",
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --host 127.0.0.1",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
@@ -46,7 +46,8 @@
   "eslintConfig": {
     "root": true,
     "globals": {
-      "polympics": "readonly"
+      "polympics": "readonly",
+      "common": "readonly"
     },
     "env": {
       "node": true
@@ -72,18 +73,5 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ],
-  "vue": {
-    "pwa": {
-      "name": "Polympics Web Dashboard",
-      "themeColor": "#cc2b31",
-      "msTileColor": "#18181b",
-      "iconPaths": {
-        "favicon32": "img/icons/favicon-32x32.png",
-        "favicon16": "img/icons/favicon-16x16.png",
-        "appleTouchIcon": "img/icons/apple-touch-icon-152x152.png",
-        "msTitleImage": "/img/icons/msapplication-icon-144x144.png"
-      }
-    }
-  }
+  ]
 }

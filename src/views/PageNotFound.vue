@@ -1,9 +1,9 @@
 <template lang="pug">
-main(class='main main--centered')
-  section(class='page_intro page_intro--centered')
-    i(class='fas fa-search page_intro__icon')
-    h1(class='page_intro__header') 404 Error
-    p(class='page_intro__description') Couldn't find that page.
+main.main.main--centered
+  section.page_intro.page_intro--centered
+    i.fas.fa-search.page_intro__icon
+    h1.page_intro__header 404 Error
+    p.page_intro__description Couldn't find that page.
 </template>
 
 <script>

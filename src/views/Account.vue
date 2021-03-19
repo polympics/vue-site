@@ -1,5 +1,5 @@
 <template lang="pug">
-main(class='main main--centered')
+main.main.main--centered
   ProfileCard(:account='account')
 </template>
 
@@ -7,8 +7,7 @@ main(class='main main--centered')
 import { Component, Vue } from "vue-property-decorator";
 import ProfileCard from "@/components/ProfileCard.vue";
 
-// eslint-disable-next-line
-const client = new polympics.UnauthenticatedClient();
+const client = common.getClient(process.env.VUE_APP_API_URL);
 
 @Component({
     components: {

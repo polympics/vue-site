@@ -1,10 +1,10 @@
 <template lang="pug">
-router-link(class='card_item', :to='link')
-  div(class='card_item__content_wrapper')
-    h2(class='card_item__header') {{ title }}
-    p(class='card_item__content')
-      <slot></slot>
-  i(class='fas fa-arrow-right card_item__arrow')
+router-link.card_item(:to='link')
+  .card_item__content_wrapper
+    h2.card_item__header {{ title }}
+    p.card_item__content
+      slot
+  i.fas.fa-arrow-right.card_item__arrow
 </template>
 
 <script>

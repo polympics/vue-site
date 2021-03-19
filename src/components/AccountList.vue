@@ -1,17 +1,17 @@
 <template lang="pug">
-table(class='account_list')
-    tr(class='account_list__header')
+table.account_list
+    tr.account_list__header
         th(colspan='3') Polympics Members
-    tr(class='account_list__row', v-for='account in accounts')
-        td(class='account_list__row__pfp')
+    tr.account_list__row(v-for='account in accounts')
+        td.account_list__row__pfp
             img(:src='account.avatarUrl', alt='Pfp')
-        td(class='account_list__row__name')
+        td.account_list__row__name
             router-link(:to='"/account/" + account.id')
                 | {{ account.name }}!{'#'}{{ account.discriminator }}
-        td(class='account_list__row__team')
+        td.account_list__row__team
             a(href='#', v-if='account.team') {{ account.team.name }}
             p(href='#', v-else) 🏳️‍🌈 No team
-    tr(class='account_list_placeholder', v-if='!accounts.length')
+    tr.account_list_placeholder(v-if='!accounts.length')
         td There's nothing here!
 </template>
 

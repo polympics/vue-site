@@ -1,5 +1,5 @@
 <template lang="pug">
-footer(class='footer')
+footer.footer
     | Polympics website, by Artemis.
     br
     br

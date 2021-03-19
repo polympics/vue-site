@@ -1,16 +1,35 @@
 <template lang="pug">
-nav(class='navbar')
-    router-link(to='/', class='navbar__link navbar__link--home')
-        img(
-            src='/img/icons/icon-192.png'
+nav.navbar
+    router-link.navbar__home(to='/')
+        img.navbar__home__icon(
+            src='/img/icons/icon-192.png',
             alt='Polympics Logo'
-            class='navbar__link__icon'
         )
-        span(class='navbar__link__text') Polympics
-    router-link(to='/accounts' class='navbar__link') Members
-    router-link(to='/teams' class='navbar__link') Teams
-    router-link(to='/about' class='navbar__link') About
+        span.navbar__home__text Polympics
+    .navbar__wrapper
+        .navbar__menu
+            span.navbar__menu__title Teams
+            a.navbar__menu__item(href="#") All Teams
+            a.navbar__menu__item(href="#") My Team
+            a.navbar__menu__item(href="#") Create Team
+        .navbar__menu
+            span.navbar__menu__title Members
+            router-link.navbar__menu__item(to='/accounts') All Members
+            router-link.navbar__menu__item(
+                :to='"/account/" + account.id', v-if='account') Me
+            router-link.navbar__menu__item(to='/logout', v-if='account') Logout
+            router-link.navbar__menu__item(to='/login', v-else) Login or Signup
+        .navbar__menu
+            span.navbar__menu__title About
+            router-link.navbar__menu__item(to='/about') About
+            a.navbar__menu__item(href="#") Events
 </template>
+
+<script>
+export default {
+    props: ["account"]
+};
+</script>
 
 <style lang="sass" scoped>
 @import "../sass/_variables.sass"
@@ -20,7 +39,44 @@ nav(class='navbar')
   justify-content: flex-end
   flex-wrap: wrap
 
-.navbar__link
+.navbar__wrapper
+  display: flex
+  justify-content: flex-end
+  flex-wrap: wrap
+  position: absolute
+
+.navbar__menu
+  margin: 1rem
+  padding: 1rem
+  text-decoration: none
+  transition: color 0.5s
+  text-transform: lowercase
+  font-variant: small-caps
+  font-weight: 900
+  display: flex
+  flex-direction: column
+  align-items: center
+  height: 1rem
+  max-height: 1rem
+  transition: max-height 2s linear
+  overflow: hidden
+  z-index: 1
+  &:hover
+      height: 100%
+      max-height: 1000px
+      background: $bubble-bg
+      border-radius: 1rem
+      .navbar__menu__item
+          display: block
+
+.navbar__menu__item
+    color: $body-text
+    margin-top: 0.5rem
+    transition: color 0.2s
+    &:hover
+        color: $navbar-text-hover
+
+.navbar__home
   margin: 2em
   color: $body-text
   text-decoration: none
@@ -30,48 +86,34 @@ nav(class='navbar')
   font-weight: 900
   display: flex
   align-items: center
-
-.navbar__link:hover
-  color: $navbar-text-hover
-
-.navbar__link--home
   text-transform: none
   font-variant: normal
   margin-right: auto
   font-weight: 800
 
-.navbar__link__icon
+.navbar__home__icon
   height: 2.5em
   margin-right: 0.5em
 
 @media only screen and (max-width: 700px)
-  .navbar__link
-    margin: 1.5em
-
-  .navbar__link--home
+  .navbar__home
     margin-right: auto
 
 @media only screen and (max-width: 470px)
     .navbar
         justify-content: center
 
-    .navbar__link--home
+    .navbar__home
         font-variant: small-caps
         font-weight: 900
         margin-right: 1.5em
-        .navbar__link__text
-            display: none
-
         &::after
             content: "home"
 
-    .navbar__link__icon
+    .navbar__home__text, .navbar__home__icon
         display: none
 
 @media only screen and (max-width: 430px)
-  .navbar__link
-    margin: 1em
-
-  .navbar__link--home
+  .navbar__home
     margin-right: 1.5em
 </style>

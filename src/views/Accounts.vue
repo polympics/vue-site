@@ -1,5 +1,5 @@
 <template lang="pug">
-main(class='main main--centered')
+main.main.main--centered
   AccountList(:accountPaginator='accounts')
 </template>
 
@@ -7,7 +7,7 @@ main(class='main main--centered')
 import { Component, Vue } from "vue-property-decorator";
 import AccountList from "@/components/AccountList.vue";
 
-const client = new polympics.UnauthenticatedClient();
+const client = common.getClient(process.env.VUE_APP_API_URL);
 
 @Component({ components: { AccountList } })
 export default class Accounts extends Vue {
