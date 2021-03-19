@@ -1,7 +1,5 @@
 <template lang="pug">
 table.account_list
-    tr.account_list__header
-        th(colspan='3') Polympics Members
     tr.account_list__row(v-for='account in accounts')
         td.account_list__row__pfp
             img(:src='account.avatarUrl', alt='Pfp')
@@ -60,16 +58,13 @@ export default class AccountList extends Vue {
 .account_list
     background: $bubble-bg
     width: calc(100% - 4rem)
-    margin: 2rem
+    margin: 1rem 2rem
     padding: 1rem 2rem
     border-radius: 2rem
     border-collapse: separate
     border-spacing: 0 1rem
     a
         color: $body-link
-
-.account_list__header th
-    font-size: 2rem
 
 .account_list_placeholder
     background: $bubble-bg

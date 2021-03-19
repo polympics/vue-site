@@ -55,6 +55,13 @@ body
 .main--centered
   align-items: center
 
+.main--full
+  align-items: stretch
+
+.main__title
+  font-size: 3rem
+  text-align: center
+
 .page_intro--centered
   align-items: center
   margin-top: 7rem
