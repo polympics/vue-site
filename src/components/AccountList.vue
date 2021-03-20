@@ -22,6 +22,7 @@ Component.registerHooks(["beforeRouteEnter"]);
 export default class AccountList extends Vue {
     accounts = [];
     finished = false;
+    currentlyFetching = false;
     @Prop()
     accountPaginator;
 
@@ -41,12 +42,14 @@ export default class AccountList extends Vue {
     }
 
     async fetchAccounts() {
-        if (this.finished) return;
+        if (this.finished || this.currentlyFetching) return;
+        this.currentlyFetching = true;
         const accounts = await this.accountPaginator.nextPage();
         if (!accounts.length) {
             this.finished = true;
             return;
         }
+        this.currentlyFetching = false;
         this.accounts.push(...accounts);
     }
 }

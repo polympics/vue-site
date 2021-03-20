@@ -1,6 +1,8 @@
 <template lang="pug">
 main.main.main--centered
   ProfileCard(:account='account')
+    router-link.account__link(
+        :to='`/account/${account.id}/manage`') Manage Account
 </template>
 
 <script>
@@ -9,11 +11,7 @@ import ProfileCard from "@/components/ProfileCard.vue";
 
 const client = common.getClient(process.env.VUE_APP_API_URL);
 
-@Component({
-    components: {
-        ProfileCard
-    }
-})
+@Component({ components: { ProfileCard } })
 export default class Account extends Vue {
     account = {
         name: "Loading...",
@@ -34,7 +32,7 @@ export default class Account extends Vue {
             account = await client.getAccount(id);
         } catch (error) {
             if (error.code === 422) {
-                window.location.href = "/404";
+                this.$router.push({ path: "/404" });
             }
             return;
         }

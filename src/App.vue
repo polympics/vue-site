@@ -2,7 +2,7 @@
   div(class='body')
     NavBar(:account='account')
     transition(name='slide_transition', mode='out-in')
-      router-view(@reloadNavbar='getAccount')
+      router-view(@reloadNavbar='getAccount', :key='$route.path')
     Footer
 </template>
 
@@ -133,6 +133,28 @@ body
     right: 2rem
     top: 2rem
     width: 20vw
+
+.text_input
+  -moz-appearance: textfield
+  margin: 0
+  border: 0
+  background: transparent
+  font-family: inherit
+  font-size: inherit
+  outline: none
+  color: $body-text
+  border-bottom: 1px solid $body-text
+  font-size: 1.1rem
+  padding-bottom: 5px
+  transition: font-size 50ms
+  &:focus
+    font-size: 1.3rem
+
+.input::-webkit-outer-spin-button, input::-webkit-inner-spin-button
+  -webkit-appearance: none
+
+.long_text_input
+  width: 100%
 </style>
 
 <script>

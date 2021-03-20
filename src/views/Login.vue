@@ -8,7 +8,13 @@ import Redirecting from "@/components/Redirecting.vue";
 
 @Component({ components: { Redirecting } })
 export default class Login extends Vue {
-    mounted() {
+    async mounted() {
+        const client = common.getClient(process.env.VUE_APP_API_URL);
+        if (client.getSelf) {
+            const account = await client.getSelf();
+            this.$router.push({ path: `/account/${account.id}` });
+            return;
+        }
         window.location.href =
             "https://discord.com/api/oauth2/authorize?" +
             "response_type=token&scope=identify&client_id=" +

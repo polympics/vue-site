@@ -1,7 +1,8 @@
 <template lang="pug">
 .search_bar
-    input.search_bar__input(
+    input.text_input.search_bar__input(
         placeholder='Start searching...',
+        type='search',
         :value='value',
         @input='$emit("input", $event.target.value)'
     )
@@ -22,13 +23,9 @@ export default { props: ["value"] };
     border-radius: 2rem
 
 .search_bar__input
-    border: 0
-    background: transparent
-    color: $body-text
     width: 100%
     border-bottom: 1px solid $body-text
     font-size: 1.1rem
-    font-family: inherit
     padding-bottom: 5px
     transition: font-size 50ms
     outline: none

@@ -9,7 +9,7 @@ main.account
     a.account__team(href='#', v-if='account.team')
       | {{ account.team.name }}
     span.account__team.account__team--none(v-else) 🏳️‍🌈 No team
-    a.account__link(href="#") Manage Account
+    slot
 </template>
 
 <script>
@@ -22,25 +22,27 @@ export default {
 @import "../sass/_variables.sass"
 
 .account
-  display: flex
-  margin: 4rem auto
-  max-width: 80%
+    display: flex
+    flex-direction: row
+    margin: 2rem auto
+    width: 80%
+    background: $bubble-bg
+    border-radius: 2rem
+    padding: 2rem
 
 .account__pfp
-  border-radius: 2rem
-  height: 10rem
-  z-index: 1
-  background: $accent-gradient
+    border-radius: 2rem
+    height: 10rem
+    width: 10rem
+    margin-right: 1rem
+    z-index: 1
+    background: $accent-gradient
 
 .account__details
     display: flex
+    flex-grow: 999
     flex-direction: column
     align-items: flex-start
-    background: $bubble-bg
-    border-radius: 2rem
-    margin: 2rem 0 0 -3rem
-    padding: 1rem 1rem 2rem 4rem
-    width: 100vw
 
 .account__name
     font-size: 4rem

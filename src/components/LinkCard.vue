@@ -21,7 +21,7 @@ export default {
   background: $accent-gradient
   padding: 2rem
   margin: 1rem
-  color: #fff
+  color: $body-text
   width: unquote("min(800px, calc(100vw - 10rem))")
   transition: transform 0.2s
   box-shadow: 0 0 20px $body-shadow
