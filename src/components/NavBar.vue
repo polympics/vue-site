@@ -9,14 +9,17 @@ nav.navbar
     .navbar__wrapper
         .navbar__menu
             span.navbar__menu__title Teams
-            a.navbar__menu__item(href="#") All Teams
-            a.navbar__menu__item(href="#") My Team
-            a.navbar__menu__item(href="#") Create Team
+            router-link.navbar__menu__item(to='/teams') All Teams
+            router-link.navbar__menu__item(
+                v-if='account && account.team',
+                :to='`/team/${account.team.id}`') My Team
+            router-link.navbar__menu__item(
+                v-if='canCreateTeam', to='/teams/create') Create Team
         .navbar__menu
             span.navbar__menu__title Members
             router-link.navbar__menu__item(to='/accounts') All Members
             router-link.navbar__menu__item(
-                :to='"/account/" + account.id', v-if='account') Me
+                v-if='account', :to='`/account/${account.id}`') Me
             router-link.navbar__menu__item(to='/logout', v-if='account') Logout
             router-link.navbar__menu__item(to='/login', v-else) Login or Signup
         .navbar__menu
@@ -26,9 +29,21 @@ nav.navbar
 </template>
 
 <script>
-export default {
-    props: ["account"]
-};
+import { Component, Prop, Vue } from "vue-property-decorator";
+
+@Component
+export default class NavBar extends Vue {
+    @Prop()
+    account;
+
+    get canCreateTeam() {
+        return (
+            this.account &&
+            this.account.permissions &
+                polympics.PolympicsPermissions.manageTeams
+        );
+    }
+}
 </script>
 
 <style lang="sass" scoped>
