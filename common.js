@@ -17,7 +17,7 @@ const common = {
         expiresAt.setTime(
             expiresAt.getTime() + (1000 * 60 * 60 * 24 * daysLasts));
         document.cookie = `${name}=${value};`
-            + ` expires=${expiresAt.toUTCString()}`;
+            + ` expires=${expiresAt.toUTCString()}; SameSite=Strict; Path=/`;
     },
 
     /** Delete a cookie. */
@@ -50,5 +50,26 @@ const common = {
     logout: () => {
         common.deleteCookie('username');
         common.deleteCookie('password');
+    },
+
+    /** Check if the user can manage an account.
+     *
+     * If the return value is 0, the user cannot manage the account.
+     * From least to most significant, the bits of the return value mean:
+     * - The user can manage the account's permissions.
+     * - The user can manage the account's details.
+     * - The user can manage the account's team.
+     */
+    canManage: (accountId, ownAccount) => {
+        const P = polympics.PolympicsPermissions;
+        const canChangeTeam = (
+            ownAccount.permissions & P.manageAccountTeams ||
+            ownAccount.id.toString() === accountId.toString()
+        ) ? 1 : 0;
+        const canChangeDetails =
+            (ownAccount.permissions & P.manageAccountDetails) ? 1 << 1 : 0;
+        const canChangePermissions =
+            (ownAccount.permissions & P.managePermissions) ? 1 << 2 : 0;
+        return canChangeTeam | canChangeDetails | canChangePermissions;
     }
 }
