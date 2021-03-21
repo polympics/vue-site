@@ -56,7 +56,9 @@ export default class TeamSelector extends Vue {
             return team.id === selectedTeam.id;
         });
         if (!selectedTeamDisplayed) this.teams.unshift(selectedTeam);
-        this.teams.unshift(placeholderTeam);
+        if (selectedTeam !== placeholderTeam) {
+            this.teams.unshift(placeholderTeam);
+        }
     }
 
     selectTeam(team) {

@@ -27,6 +27,20 @@ main.main.main--centered
     PermissionsInput(
         :value='account.permissions', @input='updatePermissions',
         :userPermissions='userAccount.permissions' v-if='canChangePermissions')
+    h3(v-if='canDeleteAccount') Danger Area
+    button.button.button--danger.button--enabled(
+        v-if='canDeleteAccount', @click='showAccountDeleteModal = true'
+    ) Delete Account
+    Modal(:show='showAccountDeleteModal').delete_modal
+        h2 Delete account?
+        p
+            | You cannot undo this action. Make sure you're certain you want
+            | to delete {{ accountPossesive }} account.
+        button.button.button--black.button--enabled(@click='deleteAccount')
+            | Delete
+        button.button.button--black.button--enabled(
+            @click='showAccountDeleteModal = false'
+        ) Cancel
 </template>
 
 <script>
@@ -38,6 +52,7 @@ import DiscordNameInput from "@/components/DiscordNameInput.vue";
 import PermissionsInput from "@/components/PermissionsInput.vue";
 import TeamSelector from "@/components/TeamSelector.vue";
 import Warning from "@/components/Warning.vue";
+import Modal from "@/components/Modal.vue";
 
 @Component({
     components: {
@@ -46,7 +61,8 @@ import Warning from "@/components/Warning.vue";
         DiscordNameInput,
         PermissionsInput,
         TeamSelector,
-        Warning
+        Warning,
+        Modal
     }
 })
 export default class ManageAccount extends BaseView {
@@ -60,7 +76,10 @@ export default class ManageAccount extends BaseView {
     canChangeTeam = false;
     canChangeDetails = false;
     canChangePermissions = false;
+    canDeleteAccount = false;
     isOwnAccount = false;
+    showAccountDeleteModal = false;
+    accountPossesive = "your";
 
     async created() {
         if (!this.userAccount) {
@@ -79,6 +98,7 @@ export default class ManageAccount extends BaseView {
         this.canChangeTeam = manageFlags & 1;
         this.canChangeDetails = manageFlags & (1 << 1);
         this.canChangePermissions = manageFlags & (1 << 2);
+        this.canDeleteAccount = manageFlags & (1 << 3);
         this.fetchAccount();
     }
 
@@ -93,15 +113,18 @@ export default class ManageAccount extends BaseView {
             }
             return;
         }
+        this.accountPossesive = this.isOwnAccount
+            ? "your"
+            : `${account.name}'s`;
         this.account = account;
     }
 
     async updatePermissions({ grant, revoke }) {
-        if (this.isOwnAccount) this.$emit("newCredentials");
         this.account = await this.client.updateAccount(this.account, {
             grantPermissions: grant,
             revokePermissions: revoke
         });
+        if (this.isOwnAccount) this.$emit("newCredentials");
     }
 
     async updateUsername(newUsername) {
@@ -128,10 +151,22 @@ export default class ManageAccount extends BaseView {
         });
         if (this.isOwnAccount) this.$emit("newCredentials");
     }
+
+    async deleteAccount() {
+        await this.client.deleteAccount(this.account);
+        if (this.isOwnAccount) {
+            common.logout();
+            this.$emit("newCredentials");
+        }
+        this.$router.push({ path: "/" });
+    }
 }
 </script>
 
 <style lang="sass" scoped>
 .section_warning
     margin-bottom: 1rem
+
+.delete_modal button
+    margin-right: 2rem
 </style>

@@ -59,17 +59,26 @@ const common = {
      * - The user can manage the account's permissions.
      * - The user can manage the account's details.
      * - The user can manage the account's team.
+     * - The user can delete the account.
      */
     canManage: (accountId, ownAccount) => {
         const P = polympics.PolympicsPermissions;
+        const isOwnAccount = ownAccount.id.toString() === accountId.toString();
         const canChangeTeam = (
             ownAccount.permissions & P.manageAccountTeams ||
-            ownAccount.id.toString() === accountId.toString()
+            isOwnAccount
         ) ? 1 : 0;
         const canChangeDetails =
             (ownAccount.permissions & P.manageAccountDetails) ? 1 << 1 : 0;
         const canChangePermissions =
             (ownAccount.permissions & P.managePermissions) ? 1 << 2 : 0;
-        return canChangeTeam | canChangeDetails | canChangePermissions;
+        const canDeleteAccount =
+            canChangeDetails || isOwnAccount ? 1 << 3 : 0;
+        return (
+            canChangeTeam |
+            canChangeDetails |
+            canChangePermissions |
+            canDeleteAccount
+        );
     }
 }

@@ -6,7 +6,7 @@
             :class='input.enabled ? "" : "permissions_input__flag--disabled"')
         input(
             type='checkbox', :id='input.id',
-            @change='updateFlag(input.flag, $event.checked)'
+            @change='updateFlag(input.flag, $event.target.checked)'
             :disabled='!input.enabled', :checked='input.value')
         span {{ input.prettyName }}
 </template>

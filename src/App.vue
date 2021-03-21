@@ -193,6 +193,7 @@ body
 
 .button
     border: 0
+    outline: 0
     font-family: inherit
     font-size: inherit
     font-weight: inherit
@@ -215,6 +216,10 @@ body
 .button--danger
     background: $red-no
 
-.button--danger--disabled
+.button--danger.button--disabled
     background: scale-color($red-no, $saturation: -50%)
+
+.button--black
+    background: $bubble-bg
+    box-shadow: 2px 2px 5px 1px $body-shadow
 </style>

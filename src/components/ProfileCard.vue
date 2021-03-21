@@ -5,7 +5,7 @@ main.account
         alt='Profile Picture')
     .account__details
         h1.account__name {{ account.name }}
-        span.account__discrim !{'#'}{{ account.discriminator}}
+            span.account__discrim !{'#'}{{ account.discriminator}}
         router-link.account__team(
                 :to='`/team/${account.team.id}`', v-if='account.team')
             | {{ account.team.name }}

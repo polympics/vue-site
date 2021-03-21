@@ -1,10 +1,24 @@
 <template lang="pug">
 main.main.main--full
-    h1.name
-        EditableText(
-            placeholder='Team Name', :value='team.name', v-if='canEditName',
-            @input='updateTeamName')
-        span(v-else) {{ team.name }}
+    section.team_header
+        h1.name
+            EditableText(
+                placeholder='Team Name', :value='team.name',
+                v-if='canManageTeam', @input='updateTeamName')
+            span(v-else) {{ team.name }}
+        button.button.button--danger.button--enabled(
+            v-if='canManageTeam', @click='showTeamDeleteModal = true'
+        ) Delete Team
+    Modal(:show='showTeamDeleteModal').delete_modal
+        h2 Delete team?
+        p
+            | You cannot undo this action. Make sure you're certain you want
+            | to delete Team "{{ team.name }}".
+        button.button.button--black.button--enabled(@click='deleteTeam')
+            | Delete
+        button.button.button--black.button--enabled(
+            @click='showTeamDeleteModal = false'
+        ) Cancel
     h3.member_count {{ team.memberCount }} members
     SearchBar(v-model='query', @input='update')
     ItemList.member_list(:paginator='members', :key='listKey')
@@ -26,8 +40,11 @@ import ItemList from "@/components/ItemList.vue";
 import SearchBar from "@/components/SearchBar.vue";
 import EditableText from "@/components/EditableText.vue";
 import AccountRow from "@/components/AccountRow.vue";
+import Modal from "@/components/Modal.vue";
 
-@Component({ components: { ItemList, SearchBar, EditableText, AccountRow } })
+@Component({
+    components: { ItemList, SearchBar, EditableText, AccountRow, Modal }
+})
 export default class Team extends BaseView {
     team = {
         name: "Loading...",
@@ -37,9 +54,10 @@ export default class Team extends BaseView {
     members = null;
     query = "";
     listKey = 0;
-    canEditName = false;
+    canManageTeam = false;
     canKickMembers = false;
     canPromoteMembers = false;
+    showTeamDeleteModal = false;
 
     created() {
         this.update();
@@ -74,7 +92,7 @@ export default class Team extends BaseView {
             this.userAccount.team &&
             this.userAccount.team.id.toString() === id &&
             userPerms & P.manageOwnTeam;
-        this.canEditName = ownsTeam || userPerms & P.manageTeams;
+        this.canManageTeam = ownsTeam || userPerms & P.manageTeams;
         this.canKickMembers = ownsTeam || userPerms & P.manageAccountTeams;
         this.canPromoteMembers =
             ownsTeam ||
@@ -90,6 +108,7 @@ export default class Team extends BaseView {
 
     async updateTeamName(newName) {
         await this.client.updateTeam(this.team, { name: newName });
+        this.team.name = newName;
     }
 
     async kickMember(account) {
@@ -110,11 +129,24 @@ export default class Team extends BaseView {
         });
         this.update();
     }
+
+    async deleteTeam() {
+        const isOwnTeam =
+            this.userAccount.team && this.userAccount.team.id === this.team.id;
+        await this.client.deleteTeam(this.team);
+        if (isOwnTeam) this.$emit("newCredentials");
+        this.$router.push({ path: "/teams" });
+    }
 }
 </script>
 
 <style lang="sass" scoped>
 @import "../sass/_variables.sass"
+
+.team_header
+    display: flex
+    flex-direction: column
+    align-items: center
 
 .name, .member_count
     margin: 1rem 0
@@ -125,4 +157,7 @@ export default class Team extends BaseView {
 
 .member_count
     font-size: 1.5rem
+
+.delete_modal button
+    margin-right: 2rem
 </style>
