@@ -12,6 +12,7 @@ import OAuth2Callback from "./views/OAuth2Callback.vue";
 import Logout from "./views/Logout.vue";
 import Teams from "./views/Teams.vue";
 import Team from "./views/Team.vue";
+import CreateTeam from "./views/CreateTeam.vue";
 
 Vue.use(VueRouter);
 
@@ -22,6 +23,7 @@ const routes = [
     { path: "/account/:id", component: Account },
     { path: "/account/:id/manage", component: ManageAccount },
     { path: "/teams", component: Teams },
+    { path: "/teams/create", component: CreateTeam },
     { path: "/team/:id", component: Team },
     { path: "/login", component: Login },
     { path: "/login/callback", component: OAuth2Callback },

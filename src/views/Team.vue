@@ -6,7 +6,7 @@ main.main.main--full
             @input='updateTeamName')
         span(v-else) {{ team.name }}
     h3.member_count {{ team.memberCount }} members
-    SearchBar(v-model='query', @input='updateSearch')
+    SearchBar(v-model='query', @input='update')
     ItemList.member_list(:paginator='members', :key='listKey')
         template.test(v-slot:default='data')
             AccountRow(
