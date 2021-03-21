@@ -38,9 +38,17 @@ export default class PermissionsInput extends Vue {
         const inputs = [];
         for (const flagName of flags) {
             const flag = polympics.PolympicsPermissions[flagName];
-            const enabled = this.userPermissions & flag;
+            let enabled = this.userPermissions & flag;
             const id = `permissions__${flagName}`;
             const prettyName = prettifyCamelCase(flagName);
+            if (!enabled && flagName === "manageOwnTeam") {
+                if (
+                    this.userPermissions &
+                    polympics.PolympicsPermissions.manageTeams
+                ) {
+                    enabled = true;
+                }
+            }
             inputs.push({
                 enabled: enabled,
                 id: id,

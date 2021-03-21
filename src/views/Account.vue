@@ -2,7 +2,7 @@
 main.main.main--centered
   ProfileCard(:account='account')
     router-link.account__link(
-        :to='`/account/${account.id}/manage`', v-if='isOwnAccount'
+        :to='`/account/${account.id}/manage`', v-if='canManageAccount'
     ) Manage Account
 </template>
 
@@ -20,7 +20,7 @@ export default class Account extends BaseView {
             name: "Loading..."
         }
     };
-    isOwnAccount = false;
+    canManageAccount = false;
 
     created() {
         this.fetchAccount();
@@ -37,6 +37,7 @@ export default class Account extends BaseView {
             }
             return;
         }
+        this.canManageAccount = common.canManage(id, this.userAccount);
         this.isOwnAccount = this.userAccount && id === this.userAccount.id;
         this.account = account;
     }

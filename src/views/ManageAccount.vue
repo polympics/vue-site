@@ -123,10 +123,10 @@ export default class ManageAccount extends BaseView {
     }
 
     async updateTeam(newTeam) {
-        if (this.isOwnAccount) this.$emit("newCredentials");
         this.account = await this.client.updateAccount(this.account, {
             team: newTeam
         });
+        if (this.isOwnAccount) this.$emit("newCredentials");
     }
 }
 </script>
