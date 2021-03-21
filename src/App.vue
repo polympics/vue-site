@@ -1,10 +1,45 @@
 <template lang="pug">
-  div(class='body')
-    NavBar(:account='account')
+div(class='body')
+    NavBar(:account='userAccount')
     transition(name='slide_transition', mode='out-in')
-      router-view(@reloadNavbar='getAccount', :key='$route.path')
+        router-view(
+            @newCredentials='getAccount', :key='$route.path',
+            :client='client', :userAccount='userAccount', v-if='client')
+        main.main.main--centered(v-else)
+          section.page_intro.page_intro--centered
+            i.fas.fa-spinner.fa-spin.fa-5x
     Footer
 </template>
+
+<script>
+import { Component, Vue } from "vue-property-decorator";
+import NavBar from "@/components/NavBar.vue";
+import Footer from "@/components/Footer.vue";
+
+@Component({ components: { NavBar, Footer } })
+export default class App extends Vue {
+    client = null;
+    userAccount = null;
+
+    mounted() {
+        this.getAccount();
+        // Re-fetch the account every 5 minutes in case it changes elsewhere.
+        window.setInterval(this.getAccount, 1000 * 60 * 5);
+    }
+
+    async getAccount() {
+        const client = common.getClient(process.env.VUE_APP_API_URL);
+        if (client.getSelf) {
+            this.userAccount = await client.getSelf();
+        } else {
+            this.userAccount = null;
+        }
+        // Assign client after assigned userAccount since the view gets
+        // reloaded when we assign client.
+        this.client = client;
+    }
+}
+</script>
 
 <style lang="sass">
 @import './sass/_variables.sass'
@@ -156,27 +191,3 @@ body
 .long_text_input
   width: 100%
 </style>
-
-<script>
-import { Component, Vue } from "vue-property-decorator";
-import NavBar from "@/components/NavBar.vue";
-import Footer from "@/components/Footer.vue";
-
-@Component({ components: { NavBar, Footer } })
-export default class App extends Vue {
-    account = null;
-
-    mounted() {
-        this.getAccount();
-    }
-
-    async getAccount() {
-        const client = common.getClient(process.env.VUE_APP_API_URL);
-        if (client.getSelf) {
-            this.account = await client.getSelf();
-        } else {
-            this.account = null;
-        }
-    }
-}
-</script>

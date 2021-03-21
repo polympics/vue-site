@@ -3,14 +3,15 @@ Redirecting
 </template>
 
 <script>
-import { Component, Vue } from "vue-property-decorator";
+import { Component } from "vue-property-decorator";
+import BaseView from "./BaseView";
 import Redirecting from "@/components/Redirecting.vue";
 
 @Component({ components: { Redirecting } })
-export default class Logout extends Vue {
+export default class Logout extends BaseView {
     mounted() {
         common.logout();
-        this.$emit("reloadNavbar");
+        this.$emit("newCredentials");
         this.$router.push({ path: "/" });
     }
 }

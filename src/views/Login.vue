@@ -3,16 +3,15 @@ Redirecting
 </template>
 
 <script>
-import { Component, Vue } from "vue-property-decorator";
+import { Component } from "vue-property-decorator";
+import BaseView from "./BaseView";
 import Redirecting from "@/components/Redirecting.vue";
 
 @Component({ components: { Redirecting } })
-export default class Login extends Vue {
+export default class Login extends BaseView {
     async mounted() {
-        const client = common.getClient(process.env.VUE_APP_API_URL);
-        if (client.getSelf) {
-            const account = await client.getSelf();
-            this.$router.push({ path: `/account/${account.id}` });
+        if (this.account) {
+            this.$router.push({ path: `/account/${this.account.id}` });
             return;
         }
         window.location.href =

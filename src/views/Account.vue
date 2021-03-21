@@ -2,17 +2,17 @@
 main.main.main--centered
   ProfileCard(:account='account')
     router-link.account__link(
-        :to='`/account/${account.id}/manage`') Manage Account
+        :to='`/account/${account.id}/manage`', v-if='isOwnAccount'
+    ) Manage Account
 </template>
 
 <script>
-import { Component, Vue } from "vue-property-decorator";
+import { Component } from "vue-property-decorator";
+import BaseView from "./BaseView";
 import ProfileCard from "@/components/ProfileCard.vue";
 
-const client = common.getClient(process.env.VUE_APP_API_URL);
-
 @Component({ components: { ProfileCard } })
-export default class Account extends Vue {
+export default class Account extends BaseView {
     account = {
         name: "Loading...",
         discriminator: "0000",
@@ -20,6 +20,7 @@ export default class Account extends Vue {
             name: "Loading..."
         }
     };
+    isOwnAccount = false;
 
     created() {
         this.fetchAccount();
@@ -29,13 +30,14 @@ export default class Account extends Vue {
         const id = this.$route.params.id;
         let account;
         try {
-            account = await client.getAccount(id);
+            account = await this.client.getAccount(id);
         } catch (error) {
             if (error.code === 422) {
                 this.$router.push({ path: "/404" });
             }
             return;
         }
+        this.isOwnAccount = this.userAccount && id === this.userAccount.id;
         this.account = account;
     }
 }

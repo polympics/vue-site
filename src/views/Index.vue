@@ -15,13 +15,13 @@ main.main.main--centered
 </template>
 
 <script>
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Prop } from "vue-property-decorator";
+import BaseView from "./BaseView";
 import LinkCard from "@/components/LinkCard.vue";
 
-@Component({
-    components: {
-        LinkCard
-    }
-})
-export default class Index extends Vue {}
+@Component({ components: { LinkCard } })
+export default class Index extends BaseView {
+    @Prop()
+    userAccount;
+}
 </script>

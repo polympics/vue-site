@@ -3,11 +3,12 @@ Redirecting
 </template>
 
 <script>
-import { Component, Vue } from "vue-property-decorator";
+import { Component } from "vue-property-decorator";
+import BaseView from "./BaseView";
 import Redirecting from "@/components/Redirecting.vue";
 
 @Component({ components: { Redirecting } })
-export default class OAuth2Callback extends Vue {
+export default class OAuth2Callback extends BaseView {
     mounted() {
         const callbackData = new URLSearchParams(
             window.location.hash.substr(1)
@@ -25,12 +26,11 @@ export default class OAuth2Callback extends Vue {
     }
 
     async loginWith(token) {
-        const client = common.getClient(process.env.VUE_APP_API_URL);
-        const session = await client.discordAuthenticate(token);
+        const session = await this.client.discordAuthenticate(token);
         common.login(session);
         const userClient = common.getClient(process.env.VUE_APP_API_URL);
         const account = await userClient.getSelf();
-        this.$emit("reloadNavbar");
+        this.$emit("newCredentials");
         this.$router.push({ path: `/account/${account.id}` });
     }
 }

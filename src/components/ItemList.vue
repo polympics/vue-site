@@ -27,6 +27,7 @@ export default class ItemList extends Vue {
     }
 
     async fetchItems() {
+        if (!this.paginator) return;
         if (this.finished || this.currentlyFetching) return;
         this.currentlyFetching = true;
         // FIXME: Only fetch if we're near the end.
@@ -41,7 +42,7 @@ export default class ItemList extends Vue {
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 @import "../sass/_variables.sass"
 
 .item_list
@@ -74,8 +75,7 @@ export default class ItemList extends Vue {
 .item_list__row__extra
     white-space: nowrap
 
-.item_list__row__image
-    img
-        width: 48px
-        border-radius: 50%
+.item_list__row__image > img
+    width: 48px
+    border-radius: 50%
 </style>

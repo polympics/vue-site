@@ -23,7 +23,6 @@
 <script>
 import { Component, Vue, Prop } from "vue-property-decorator";
 
-const client = common.getClient(process.env.VUE_APP_API_URL);
 const placeholderTeam = {
     name: "🏳️‍🌈 No team",
     id: 0,
@@ -36,6 +35,8 @@ export default class TeamSelector extends Vue {
     teams = [];
     @Prop()
     selectedTeam;
+    @Prop()
+    client;
 
     mounted() {
         this.fetchTeams("");
@@ -46,7 +47,7 @@ export default class TeamSelector extends Vue {
     }
 
     async fetchTeams(query) {
-        const paginator = client.listTeams({ search: query });
+        const paginator = this.client.listTeams({ search: query });
         // Just get the first 5 matching teams.
         this.teams = (await paginator.getPage({ perPage: 5 })).data;
         this.teams.unshift(placeholderTeam);

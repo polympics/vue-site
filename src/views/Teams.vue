@@ -10,19 +10,18 @@ main.main.main--full
 </template>
 
 <script>
-import { Component, Vue } from "vue-property-decorator";
+import { Component } from "vue-property-decorator";
+import BaseView from "./BaseView";
 import ItemList from "@/components/ItemList.vue";
 import SearchBar from "@/components/SearchBar.vue";
 
-const client = common.getClient(process.env.VUE_APP_API_URL);
-
 @Component({ components: { ItemList, SearchBar } })
-export default class Teams extends Vue {
-    teams = client.listTeams();
+export default class Teams extends BaseView {
+    teams = this.client.listTeams();
     query = "";
 
     updateSearch() {
-        this.teams = client.listTeams({ search: this.query });
+        this.teams = this.client.listTeams({ search: this.query });
     }
 }
 </script>

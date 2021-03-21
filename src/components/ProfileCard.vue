@@ -6,7 +6,8 @@ main.account
   .account__details
     h1.account__name {{ account.name }}
       span.account__discrim !{'#'}{{ account.discriminator}}
-    a.account__team(href='#', v-if='account.team')
+    router-link.account__team(
+        :to='`/team/${account.team.id}`', v-if='account.team')
       | {{ account.team.name }}
     span.account__team.account__team--none(v-else) 🏳️‍🌈 No team
     slot

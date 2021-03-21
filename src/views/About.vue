@@ -23,8 +23,9 @@ main.main
 </template>
 
 <script>
-import { Component, Vue } from "vue-property-decorator";
+import { Component } from "vue-property-decorator";
+import BaseView from "./BaseView";
 
 @Component
-export default class About extends Vue {}
+export default class About extends BaseView {}
 </script>

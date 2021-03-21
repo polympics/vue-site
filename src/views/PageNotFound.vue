@@ -7,8 +7,9 @@ main.main.main--centered
 </template>
 
 <script>
-import { Component, Vue } from "vue-property-decorator";
+import { Component } from "vue-property-decorator";
+import BaseView from "./BaseView";
 
 @Component
-export default class PageNotFound extends Vue {}
+export default class PageNotFound extends BaseView {}
 </script>
