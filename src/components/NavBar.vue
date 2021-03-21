@@ -50,39 +50,39 @@ export default class NavBar extends Vue {
 @import "../sass/_variables.sass"
 
 .navbar
-  display: flex
-  justify-content: flex-end
-  flex-wrap: wrap
+    display: flex
+    justify-content: flex-end
+    flex-wrap: wrap
 
 .navbar__wrapper
-  display: flex
-  justify-content: flex-end
-  flex-wrap: wrap
-  position: absolute
+    display: flex
+    justify-content: flex-end
+    flex-wrap: wrap
+    position: absolute
 
 .navbar__menu
-  margin: 1rem
-  padding: 1rem
-  text-decoration: none
-  transition: color 0.5s
-  text-transform: lowercase
-  font-variant: small-caps
-  font-weight: 900
-  display: flex
-  flex-direction: column
-  align-items: center
-  height: 1rem
-  max-height: 1rem
-  transition: max-height 2s linear
-  overflow: hidden
-  z-index: 1
-  &:hover
-      height: 100%
-      max-height: 1000px
-      background: $bubble-bg
-      border-radius: 1rem
-      .navbar__menu__item
-          display: block
+    margin: 1rem
+    padding: 1rem
+    text-decoration: none
+    transition: color 0.5s
+    text-transform: lowercase
+    font-variant: small-caps
+    font-weight: 900
+    display: flex
+    flex-direction: column
+    align-items: center
+    height: 1rem
+    max-height: 1rem
+    transition: max-height 2s linear
+    overflow: hidden
+    z-index: 1
+    &:hover
+        height: 100%
+        max-height: 1000px
+        background: $bubble-bg
+        border-radius: 1rem
+        .navbar__menu__item
+            display: block
 
 .navbar__menu__item
     color: $body-text
@@ -92,27 +92,27 @@ export default class NavBar extends Vue {
         color: $navbar-text-hover
 
 .navbar__home
-  margin: 2em
-  color: $body-text
-  text-decoration: none
-  transition: color 0.5s
-  text-transform: lowercase
-  font-variant: small-caps
-  font-weight: 900
-  display: flex
-  align-items: center
-  text-transform: none
-  font-variant: normal
-  margin-right: auto
-  font-weight: 800
+    margin: 2em
+    color: $body-text
+    text-decoration: none
+    transition: color 0.5s
+    text-transform: lowercase
+    font-variant: small-caps
+    font-weight: 900
+    display: flex
+    align-items: center
+    text-transform: none
+    font-variant: normal
+    margin-right: auto
+    font-weight: 800
 
 .navbar__home__icon
-  height: 2.5em
-  margin-right: 0.5em
+    height: 2.5em
+    margin-right: 0.5em
 
 @media only screen and (max-width: 700px)
-  .navbar__home
-    margin-right: auto
+    .navbar__home
+        margin-right: auto
 
 @media only screen and (max-width: 470px)
     .navbar
@@ -129,6 +129,6 @@ export default class NavBar extends Vue {
         display: none
 
 @media only screen and (max-width: 430px)
-  .navbar__home
-    margin-right: 1.5em
+    .navbar__home
+        margin-right: 1.5em
 </style>

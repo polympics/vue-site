@@ -13,11 +13,11 @@ footer.footer
 @import "../sass/_variables.sass"
 
 .footer
-  margin-top: 2rem
-  background: $footer-bg
-  padding: 3rem
-  text-align: center
+    margin-top: 2rem
+    background: $footer-bg
+    padding: 3rem
+    text-align: center
 
 .footer a
-  color: $footer-link
+    color: $footer-link
 </style>

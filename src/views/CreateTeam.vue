@@ -4,10 +4,9 @@ main.main
         h1.page_intro__header Create a Team
         input.text_input#team_name_input(
             v-model='teamName', placeholder='Team name')
-        input.create_button(
-            type='submit',
-            value='Create'
-            :class='teamName ? "create_button--enabled" : "create_button--disabled"'
+        input.button(
+            type='submit', value='Create'
+            :class='teamName ? "button--enabled" : "button--disabled"'
         )
 </template>
 
@@ -54,25 +53,4 @@ export default class CreateTeam extends BaseView {
     padding: 2rem
     input
         margin: 0.4rem 0
-
-.create_button
-    border: 0
-    font-family: inherit
-    font-size: inherit
-    font-weight: inherit
-    color: inherit
-    border-radius: 0.5rem
-    padding: 1rem
-    box-shadow: 2px 2px 10px 2px $body-shadow
-
-.create_button--enabled
-    background: $accent-gradient
-    cursor: pointer
-    transition: transform 50ms
-    &:hover
-        transform: scale(1.2)
-
-.create_button--disabled
-    background: $grey-accent-gradient
-    cursor: default
 </style>

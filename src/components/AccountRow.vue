@@ -10,16 +10,14 @@ div(v-transparent)
             | {{ account.team.name }}
         span(v-else) 🏳️‍🌈 No team
     td.item_list__row__extra(v-if='showPromoteButtons')
-        .user_icon_wrapper
-            i.fas.fa-crown.user_icon.user_icon--demote(
-                @click='$emit("demoteMember", account)',
-                v-if='isOwnerCheck(account)')
-            i.fas.fa-crown.user_icon.user_icon--promote(
-                @click='$emit("promoteMember", account)', v-else)
+        i.fas.fa-crown.user_icon.user_icon--demote(
+            @click='$emit("demoteMember", account)',
+            v-if='isOwnerCheck(account)')
+        i.fas.fa-crown.user_icon.user_icon--promote(
+            @click='$emit("promoteMember", account)', v-else)
     td.item_list__row__extra(v-if='showKickButtons')
-        .user_icon_wrapper
-            i.fas.fa-user-slash.user_icon.user_icon--kick(
-                @click='$emit("kickMember", account)')
+        i.fas.fa-user-slash.user_icon.user_icon--kick(
+            @click='$emit("kickMember", account)')
 </template>
 
 <script>
@@ -47,15 +45,13 @@ export default class AccountRow extends Vue {
     width: 48px
     border-radius: 50%
 
-.user_icon_wrapper
-    width: 2.5rem
-
 .user_icon
     cursor: pointer
-    font-size: 1rem
-    transition: all 50ms
+    font-size: 1.2rem
+    transition: all 20ms
+    margin: 0 0.7rem
     &:hover
-        transform: scale(1.2)
+        transform: scale(1.5)
 
 .user_icon--kick
     color: $red-no

@@ -50,13 +50,13 @@ export default class TeamSelector extends Vue {
         const paginator = this.client.listTeams({ search: query });
         // Just get the first 5 matching teams.
         this.teams = (await paginator.getPage({ perPage: 5 })).data;
-        this.teams.unshift(placeholderTeam);
         const selectedTeam = this.getSelectedTeam();
         // Make sure the selected team is always displayed.
         const selectedTeamDisplayed = this.teams.some(team => {
             return team.id === selectedTeam.id;
         });
         if (!selectedTeamDisplayed) this.teams.unshift(selectedTeam);
+        this.teams.unshift(placeholderTeam);
     }
 
     selectTeam(team) {
