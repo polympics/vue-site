@@ -1,5 +1,5 @@
 <template lang="pug">
-div(transparent)
+div(v-transparent)
     td.item_list__row__image
         img(:src='account.avatarUrl + "?size=64"', alt='Pfp')
     td.item_list__row__main

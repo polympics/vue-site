@@ -67,8 +67,6 @@ export default class ItemList extends Vue {
 
 .item_list__row
     padding: 1rem 0
-    td
-        vertical-align: middle
 
 .item_list__row__main
     width: 100%
