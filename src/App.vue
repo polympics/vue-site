@@ -78,7 +78,7 @@ body
     flex-direction: column
     align-items: flex-start
     position: relative
-    width: calc(100vw - 20px)
+    width: 100%
     min-height: calc(100vh - 8.5rem)
 
 .page_intro
