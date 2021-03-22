@@ -14,16 +14,12 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.a72e7f3a2116a1aa1d470d4871bdada0.js"
+  "/precache-manifest.1e59340dd3059d905733956c91df2595.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "polympics-web-vue"});
 
-self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
-    self.skipWaiting();
-  }
-});
+workbox.core.skipWaiting();
 
 /**
  * The workboxSW.precacheAndRoute() method efficiently caches and responds to
