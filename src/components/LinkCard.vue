@@ -1,8 +1,8 @@
 <template lang="pug">
 router-link.card_item(:to='link')
     .card_item__content_wrapper
-        h2.card_item__header {{ title }}
-        p.card_item__content
+        h2.card_item__header(v-emoji) {{ title }}
+        p.card_item__content(v-emoji)
             slot
     i.fas.fa-arrow-right.card_item__arrow
 </template>

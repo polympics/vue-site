@@ -12,7 +12,7 @@
                 :class='teamSelected(team) ? "teams_list__team--selected" : ""'
             )
             td
-                label(:for='`team_${team.id}`')
+                label(:for='`team_${team.id}`', v-emoji)
                     input(type='radio', name='team', :id='`team_${team.id}`')
                     | {{ team.name }}
             td(v-if='!team.isPlaceholder') {{ team.memberCount }} Members

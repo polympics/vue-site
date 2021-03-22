@@ -4,12 +4,12 @@ main.account
         :src='account.avatarUrl + "?size=256"',
         alt='Profile Picture')
     .account__details
-        h1.account__name {{ account.name }}
+        h1.account__name(v-emoji) {{ account.name }}
             span.account__discrim !{'#'}{{ account.discriminator}}
         router-link.account__team(
-                :to='`/team/${account.team.id}`', v-if='account.team')
+                :to='`/team/${account.team.id}`', v-if='account.team', v-emoji)
             | {{ account.team.name }}
-        span.account__team.account__team--none(v-else) 🏳️‍🌈 No team
+        span.account__team.account__team--none(v-else, v-emoji) 🏳️‍🌈 No team
         slot
 </template>
 

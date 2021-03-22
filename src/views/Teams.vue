@@ -5,7 +5,8 @@ main.main.main--full
     ItemList(:paginator='teams', :key='query')
         template(v-slot:default='data')
             td.item_list__row__main
-                router-link(:to='"/team/" + data.item.id') {{ data.item.name }}
+                router-link(:to='"/team/" + data.item.id', v-emoji)
+                    | {{ data.item.name }}
             td.item_list__row__extra {{ data.item.memberCount }} members
 </template>
 

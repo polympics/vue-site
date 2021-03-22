@@ -3,12 +3,13 @@ div(v-transparent)
     td.item_list__row__image
         img(:src='account.avatarUrl + "?size=64"', alt='Pfp')
     td.item_list__row__main
-        router-link(:to='`/account/${account.id}`')
+        router-link(:to='`/account/${account.id}`', v-emoji)
             | {{ account.name }}!{'#'}{{ account.discriminator }}
     td.item_list__row__extra(v-if='showTeams')
-        router-link(:to='`/team/${account.team.id}`', v-if='account.team')
+        router-link(
+                :to='`/team/${account.team.id}`', v-if='account.team', v-emoji)
             | {{ account.team.name }}
-        span(v-else) 🏳️‍🌈 No team
+        span(v-else, v-emoji) 🏳️‍🌈 No team
     td.item_list__row__extra(v-if='showPromoteButtons')
         i.fas.fa-crown.user_icon.user_icon--demote(
             @click='$emit("demoteMember", account)',

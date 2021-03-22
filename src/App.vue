@@ -222,4 +222,7 @@ body
 .button--black
     background: $bubble-bg
     box-shadow: 2px 2px 5px 1px $body-shadow
+
+.emoji
+    height: 1em
 </style>

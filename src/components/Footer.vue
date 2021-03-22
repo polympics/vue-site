@@ -1,5 +1,5 @@
 <template lang="pug">
-footer.footer
+footer.footer(v-emoji)
     | Polympics website, by Artemis.
     br
     br

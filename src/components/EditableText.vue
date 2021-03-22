@@ -7,7 +7,7 @@ input.text_input(
     v-if='editable',
     ref='editableTextInput'
 )
-span.text_uneditable(@click='makeEditable', v-else)
+span.text_uneditable(@click='makeEditable', v-else, v-emoji)
     | {{ editedValue }}
     i.fas.fa-pencil-alt.text_uneditable__icon
 </template>

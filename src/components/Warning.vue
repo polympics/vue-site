@@ -1,7 +1,7 @@
 <template lang="pug">
 div.warning
     h4.warning__title Warning
-    slot
+    slot(v-emoji)
 </template>
 
 <style lang="sass" scoped>

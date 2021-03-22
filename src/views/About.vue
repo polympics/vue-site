@@ -1,5 +1,5 @@
 <template lang="pug">
-main.main
+main.main(v-emoji)
     section.page_intro
         h1.page_intro__header About Polympics
         p.page_intro__slogan A worldwide event to bring the Polytopia community together for a summer of fun.

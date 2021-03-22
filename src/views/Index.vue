@@ -1,5 +1,5 @@
 <template lang="pug">
-main.main.main--centered
+main.main.main--centered(v-emoji)
     section.page_intro.page_intro--centered
         img(
             src='/img/logo.png', alt='PolyChampions Logo',
