@@ -6,7 +6,7 @@
             type='search',
             @input='fetchTeams($event.target.value)'
         )
-    table.teams_list(v-if='teams.length')
+    table.teams_list(v-if='teams.length', :key='listKey')
         tr.teams_list__team(
                 v-for='team in teams', @mouseup.prevent='selectTeam(team)',
                 :class='teamSelected(team) ? "teams_list__team--selected" : ""'
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import debounce from "lodash.debounce";
 import { Component, Vue, Prop } from "vue-property-decorator";
 
 const placeholderTeam = {
@@ -38,6 +39,8 @@ export default class TeamSelector extends Vue {
     @Prop()
     client;
 
+    listKey = 0;
+
     mounted() {
         this.fetchTeams("");
     }
@@ -46,7 +49,7 @@ export default class TeamSelector extends Vue {
         return this.selectedTeam || placeholderTeam;
     }
 
-    async fetchTeams(query) {
+    async _fetchTeams(query) {
         const paginator = this.client.listTeams({ search: query });
         // Just get the first 5 matching teams.
         this.teams = (await paginator.getPage({ perPage: 5 })).data;
@@ -59,7 +62,10 @@ export default class TeamSelector extends Vue {
         if (selectedTeam !== placeholderTeam) {
             this.teams.unshift(placeholderTeam);
         }
+        this.listKey += 1;
     }
+
+    fetchTeams = debounce(this._fetchTeams, 250);
 
     selectTeam(team) {
         if (this.teamSelected(team)) return;
