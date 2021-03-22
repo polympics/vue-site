@@ -1,5 +1,5 @@
 <template lang="pug">
-.search_bar
+BubbleBox.search_bar
     input.text_input.search_bar__input(
         placeholder='Start searching...',
         type='search',
@@ -9,18 +9,21 @@
 </template>
 
 <script>
-export default { props: ["value"] };
+import { Component, Vue, Prop } from "vue-property-decorator";
+import BubbleBox from "./BubbleBox";
+
+@Component({ components: { BubbleBox } })
+export default class SearchBar extends Vue {
+    @Prop()
+    value;
+}
 </script>
 
 <style lang="sass" scoped>
 @import "../sass/_variables.sass"
 
 .search_bar
-    background: $bubble-bg
-    width: auto
-    margin: 1rem 2rem
     padding: 2rem
-    border-radius: 2rem
 
 .search_bar__input
     width: 100%

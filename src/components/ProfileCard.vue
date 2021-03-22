@@ -1,10 +1,11 @@
 <template lang="pug">
-main.account
+BubbleBox.account(:key='account.id')
     img.account__pfp(
         :src='account.avatarUrl + "?size=256"',
         alt='Profile Picture')
     .account__details
-        h1.account__name(v-emoji) {{ account.name }}
+        h1.account__name(v-emoji)
+            span {{ account.name }}
             span.account__discrim !{'#'}{{ account.discriminator}}
         router-link.account__team(
                 :to='`/team/${account.team.id}`', v-if='account.team', v-emoji)
@@ -14,7 +15,14 @@ main.account
 </template>
 
 <script>
-export default { props: ["account"] };
+import { Component, Vue, Prop } from "vue-property-decorator";
+import BubbleBox from "./BubbleBox";
+
+@Component({ components: { BubbleBox } })
+export default class ProfileCard extends Vue {
+    @Prop()
+    account;
+}
 </script>
 
 <style lang="sass" scoped>
@@ -23,10 +31,6 @@ export default { props: ["account"] };
 .account
     display: flex
     flex-direction: row
-    margin: 2rem auto
-    width: 80%
-    background: $bubble-bg
-    border-radius: 2rem
     padding: 2rem
 
 .account__pfp
@@ -58,7 +62,12 @@ export default { props: ["account"] };
 .account__team--none
     color: $body-text
 
-.account__link
-    margin-top: 1rem
-    color: $body-text
+@media (max-width: 800px)
+    .account
+        flex-direction: column
+
+    .account__name
+        display: flex
+        flex-wrap: wrap
+        align-items: baseline
 </style>

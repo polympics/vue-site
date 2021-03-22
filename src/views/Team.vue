@@ -34,6 +34,7 @@ main.main.main--full
 </template>
 
 <script>
+import debounce from "lodash.debounce";
 import { Component } from "vue-property-decorator";
 import BaseView from "./BaseView";
 import ItemList from "@/components/ItemList.vue";
@@ -106,10 +107,12 @@ export default class Team extends BaseView {
         );
     }
 
-    async updateTeamName(newName) {
+    async _updateTeamName(newName) {
         await this.client.updateTeam(this.team, { name: newName });
         this.team.name = newName;
     }
+
+    updateTeamName = debounce(this._updateTeamName, 250);
 
     async kickMember(account) {
         await this.client.updateAccount(account, { team: null });
@@ -159,5 +162,5 @@ export default class Team extends BaseView {
     font-size: 1.5rem
 
 .delete_modal button
-    margin-right: 2rem
+    margin-right: 1rem
 </style>

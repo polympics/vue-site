@@ -43,3 +43,11 @@ export default class Account extends BaseView {
     }
 }
 </script>
+
+<style lang="sass" scoped>
+@import "../sass/_variables.sass"
+
+.account__link
+    margin-top: 1rem
+    color: $body-text
+</style>

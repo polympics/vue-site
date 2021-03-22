@@ -225,4 +225,5 @@ body
 
 .emoji
     height: 1em
+    vertical-align: -12.5%
 </style>

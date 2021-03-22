@@ -44,6 +44,7 @@ main.main.main--centered
 </template>
 
 <script>
+import debounce from "lodash.debounce";
 import { Component } from "vue-property-decorator";
 import BaseView from "./BaseView";
 import ProfileCard from "@/components/ProfileCard.vue";
@@ -127,23 +128,29 @@ export default class ManageAccount extends BaseView {
         if (this.isOwnAccount) this.$emit("newCredentials");
     }
 
-    async updateUsername(newUsername) {
+    async _updateUsername(newUsername) {
         this.account = await this.client.updateAccount(this.account, {
             name: newUsername
         });
     }
 
-    async updateDiscriminator(newDiscriminator) {
+    updateUsername = debounce(this._updateUsername, 250);
+
+    async _updateDiscriminator(newDiscriminator) {
         this.account = await this.client.updateAccount(this.account, {
             discriminator: newDiscriminator
         });
     }
 
-    async updateAvatarUrl(newAvatarUrl) {
+    updateDiscriminator = debounce(this._updateDiscriminator, 250);
+
+    async _updateAvatarUrl(newAvatarUrl) {
         this.account = await this.client.updateAccount(this.account, {
             avatarUrl: newAvatarUrl
         });
     }
+
+    updateAvatarUrl = debounce(this._updateAvatarUrl, 250);
 
     async updateTeam(newTeam) {
         this.account = await this.client.updateAccount(this.account, {
@@ -168,5 +175,5 @@ export default class ManageAccount extends BaseView {
     margin-bottom: 1rem
 
 .delete_modal button
-    margin-right: 2rem
+    margin-right: 1rem
 </style>

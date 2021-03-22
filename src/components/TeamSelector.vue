@@ -121,4 +121,8 @@ export default class TeamSelector extends Vue {
 
 .teams_list__team--selected
     background: $hover-bg
+
+@media (max-width: 1000px)
+    .team_selector
+        background: $bubble-bg
 </style>

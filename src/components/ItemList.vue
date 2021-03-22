@@ -1,19 +1,23 @@
 <template lang="pug">
-table.item_list
-    tr.item_list__row(v-for='item in items')
-        slot(v-bind:item='item')
-    tr.item_list_placeholder(v-if='!items.length')
-        td There's nothing here!
+BubbleBox(:key='key')
+    table.item_list
+        tr.item_list__row(v-for='item in items')
+            slot(v-bind:item='item')
+        tr(v-if='!items.length')
+            td.item_list_placeholder There's nothing here!
 </template>
 
 <script>
+import debounce from "lodash.debounce";
 import { Component, Prop, Vue } from "vue-property-decorator";
+import BubbleBox from "./BubbleBox";
 
-@Component
+@Component({ components: { BubbleBox } })
 export default class ItemList extends Vue {
     items = [];
     finished = false;
     currentlyFetching = false;
+    key = 0;
     @Prop()
     paginator;
 
@@ -26,7 +30,7 @@ export default class ItemList extends Vue {
         window.removeEventListener("scroll", this.fetchItems);
     }
 
-    async fetchItems() {
+    async _fetchItems() {
         if (!this.paginator) return;
         if (this.finished || this.currentlyFetching) return;
         this.currentlyFetching = true;
@@ -38,7 +42,10 @@ export default class ItemList extends Vue {
         }
         this.currentlyFetching = false;
         this.items.push(...items);
+        this.key += 1;
     }
+
+    fetchItems = debounce(this._fetchItems, 250);
 }
 </script>
 
@@ -46,22 +53,14 @@ export default class ItemList extends Vue {
 @import "../sass/_variables.sass"
 
 .item_list
-    background: $bubble-bg
-    width: calc(100% - 4rem)
-    margin: 1rem 2rem
     padding: 1rem 2rem
-    border-radius: 2rem
     border-collapse: separate
     border-spacing: 0 1rem
+    width: 100%
     a
         color: $body-link
 
 .item_list_placeholder
-    background: $bubble-bg
-    width: calc(100% - 8rem)
-    margin: 2rem
-    padding: 2rem
-    border-radius: 2rem
     font-weight: 800
     text-align: center
 
@@ -71,7 +70,13 @@ export default class ItemList extends Vue {
 .item_list__row__main
     width: 100%
     padding-left: 1rem
+    word-wrap: break-word
+    max-width: 50vw
 
 .item_list__row__extra
     white-space: nowrap
+
+@media (max-width: 800px)
+    .item_list
+        padding: 0.5rem
 </style>
