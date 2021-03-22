@@ -1,6 +1,6 @@
 <template lang="pug">
-main.main
-    form.page_content.create_team_form(@submit.prevent='createTeam')
+main.main: BubbleBox.page_content
+    form.create_team_form(@submit.prevent='createTeam')
         h1.page_intro__header Create a Team
         input.text_input#team_name_input(
             v-model='teamName', placeholder='Team name')
@@ -13,8 +13,9 @@ main.main
 <script>
 import { Component } from "vue-property-decorator";
 import BaseView from "./BaseView";
+import BubbleBox from "@/components/BubbleBox.vue";
 
-@Component()
+@Component({ components: { BubbleBox } })
 export default class CreateTeam extends BaseView {
     teamName = "";
 
@@ -46,10 +47,6 @@ export default class CreateTeam extends BaseView {
 .create_team_form
     display: flex
     flex-direction: column
-    margin: 2rem auto
-    width: 80%
-    background: $bubble-bg
-    border-radius: 2rem
     padding: 2rem
     input
         margin: 0.4rem 0

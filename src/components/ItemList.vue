@@ -33,8 +33,11 @@ export default class ItemList extends Vue {
     async _fetchItems() {
         if (!this.paginator) return;
         if (this.finished || this.currentlyFetching) return;
+        if (this.$el.getBoundingClientRect().bottom > window.innerHeight) {
+            // Still off the bottom of the screen
+            return;
+        }
         this.currentlyFetching = true;
-        // FIXME: Only fetch if we're near the end.
         const items = await this.paginator.nextPage();
         if (!items.length) {
             this.finished = true;

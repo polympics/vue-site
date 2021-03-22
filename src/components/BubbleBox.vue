@@ -16,7 +16,18 @@
         margin-top: 2rem
 
 @media (max-width: 1000px)
-    .bubble
+    .bubble:not(.page_content)
+        margin: 0
+        border-radius: 0
+        background: transparent
+        border-width: 5px
+        border-style: solid
+        border-image: $h-accent-gradient 100% 5 100% 5
+        &:not(:last-of-type)
+            border-bottom-width: 2rem
+
+@media (max-width: 600px)
+    .bubble.page_content
         margin: 0
         border-radius: 0
         background: transparent
