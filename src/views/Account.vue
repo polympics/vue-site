@@ -37,8 +37,10 @@ export default class Account extends BaseView {
             }
             return;
         }
-        this.canManageAccount = common.canManage(id, this.userAccount);
-        this.isOwnAccount = this.userAccount && id === this.userAccount.id;
+        if (this.userAccount) {
+            this.canManageAccount = common.canManage(id, this.userAccount);
+            this.isOwnAccount = this.userAccount && id === this.userAccount.id;
+        }
         this.account = account;
     }
 }
