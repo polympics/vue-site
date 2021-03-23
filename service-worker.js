@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.4e4c22652d0295c152fdb16ec6ad7a99.js"
+  "/precache-manifest.5502e51c1b5376cdc61ed39c516bb791.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "polympics-web-vue"});
