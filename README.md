@@ -44,3 +44,10 @@ These should all be prefixed with `VUE_APP_`. Example file:
 VUE_APP_BASE_URL=https://polytopia.fun
 VUE_APP_DISCORD_CLIENT_ID=484067640302764042
 ```
+
+Note that the Discord application associated with the `DISCORD_CLIENT` ID should have the following OAuth2 redirects added:
+
+- `{BASE_URL}/login/callback`
+- `{BASE_URL}/discord_sync/callback`
+
+Where `{BASE_URL}` is the `VUE_APP_BASE_URL` setting.

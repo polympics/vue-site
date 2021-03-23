@@ -1,6 +1,10 @@
 <template lang="pug">
 main.main.main--centered
   ProfileCard(:account='account')
+    router-link.button.button--discord.button--enabled.sync_button(
+            to='/discord_sync')
+        i.fab.fa-discord.button__icon
+        | Sync with Discord
     h3(v-if='canChangeTeam') Change Team
     Warning.section_warning(v-if='canChangeTeam && isOwnAccount')
         | Changing your team frequently is not allowed and may result in
@@ -170,6 +174,9 @@ export default class ManageAccount extends BaseView {
 
 <style lang="sass" scoped>
 @import "../sass/form.sass"
+
+.sync_button
+    margin: 1.5rem 0 0 1rem
 
 .section_warning
     margin-bottom: 1rem

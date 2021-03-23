@@ -9,7 +9,7 @@ import Redirecting from "@/components/Redirecting.vue";
 import { getClient, login } from "@/js/common.js";
 
 @Component({ components: { Redirecting } })
-export default class OAuth2Callback extends BaseView {
+export default class LoginCallback extends BaseView {
     mounted() {
         const callbackData = new URLSearchParams(
             window.location.hash.substr(1)

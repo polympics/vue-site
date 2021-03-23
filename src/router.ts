@@ -7,7 +7,9 @@ import Account from "./views/Account.vue";
 import Accounts from "./views/Accounts.vue";
 import PageNotFound from "./views/PageNotFound.vue";
 import Login from "./views/Login.vue";
-import OAuth2Callback from "./views/OAuth2Callback.vue";
+import LoginCallback from "./views/LoginCallback.vue";
+import DiscordSync from "./views/DiscordSync.vue";
+import DiscordSyncCallback from "./views/DiscordSyncCallback.vue";
 import Logout from "./views/Logout.vue";
 import Teams from "./views/Teams.vue";
 import Team from "./views/Team.vue";
@@ -25,7 +27,9 @@ const routes = [
     { path: "/teams/create", component: CreateTeam },
     { path: "/team/:id", component: Team },
     { path: "/login", component: Login },
-    { path: "/login/callback", component: OAuth2Callback },
+    { path: "/login/callback", component: LoginCallback },
+    { path: "/discord_sync", component: DiscordSync },
+    { path: "/discord_sync/callback", component: DiscordSyncCallback },
     { path: "/logout", component: Logout },
     { path: "/wiki/:wikiPath", component: WikiPage },
     { path: "**", component: PageNotFound }
