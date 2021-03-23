@@ -49,8 +49,7 @@
   "eslintConfig": {
     "root": true,
     "globals": {
-      "polympics": "readonly",
-      "common": "readonly"
+      "polympics": "readonly"
     },
     "env": {
       "node": true

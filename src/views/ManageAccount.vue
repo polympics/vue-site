@@ -54,6 +54,7 @@ import PermissionsInput from "@/components/PermissionsInput.vue";
 import TeamSelector from "@/components/TeamSelector.vue";
 import Warning from "@/components/Warning.vue";
 import Modal from "@/components/Modal.vue";
+import { canManage, logout } from "@/js/common.js";
 
 @Component({
     components: {
@@ -88,10 +89,7 @@ export default class ManageAccount extends BaseView {
             return;
         }
         this.isOwnAccount = this.$route.params.id === this.userAccount.id;
-        const manageFlags = common.canManage(
-            this.$route.params.id,
-            this.userAccount
-        );
+        const manageFlags = canManage(this.$route.params.id, this.userAccount);
         if (!manageFlags) {
             this.$router.push({ path: `/account/${this.$route.params.id}` });
             return;
@@ -162,7 +160,7 @@ export default class ManageAccount extends BaseView {
     async deleteAccount() {
         await this.client.deleteAccount(this.account);
         if (this.isOwnAccount) {
-            common.logout();
+            logout();
             this.$emit("newCredentials");
         }
         this.$router.push({ path: "/" });

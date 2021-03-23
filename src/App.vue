@@ -15,6 +15,7 @@ div(class='body')
 import { Component, Vue } from "vue-property-decorator";
 import NavBar from "@/components/NavBar.vue";
 import Footer from "@/components/Footer.vue";
+import { getClient } from "./js/common.js";
 
 @Component({ components: { NavBar, Footer } })
 export default class App extends Vue {
@@ -28,7 +29,7 @@ export default class App extends Vue {
     }
 
     async getAccount() {
-        const client = common.getClient(process.env.VUE_APP_API_URL);
+        const client = getClient();
         if (client.getSelf) {
             this.userAccount = await client.getSelf();
         } else {

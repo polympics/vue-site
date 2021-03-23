@@ -6,6 +6,7 @@ Redirecting
 import { Component } from "vue-property-decorator";
 import BaseView from "./BaseView";
 import Redirecting from "@/components/Redirecting.vue";
+import { getClient, login } from "@/js/common.js";
 
 @Component({ components: { Redirecting } })
 export default class OAuth2Callback extends BaseView {
@@ -27,8 +28,8 @@ export default class OAuth2Callback extends BaseView {
 
     async loginWith(token) {
         const session = await this.client.discordAuthenticate(token);
-        common.login(session);
-        const userClient = common.getClient(process.env.VUE_APP_API_URL);
+        login(session);
+        const userClient = getClient();
         const account = await userClient.getSelf();
         this.$emit("newCredentials");
         this.$router.push({ path: `/account/${account.id}` });

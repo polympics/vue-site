@@ -10,6 +10,7 @@ main.main.main--centered
 import { Component } from "vue-property-decorator";
 import BaseView from "./BaseView";
 import ProfileCard from "@/components/ProfileCard.vue";
+import { canManage } from "@/js/common.js";
 
 @Component({ components: { ProfileCard } })
 export default class Account extends BaseView {
@@ -38,7 +39,7 @@ export default class Account extends BaseView {
             return;
         }
         if (this.userAccount) {
-            this.canManageAccount = common.canManage(id, this.userAccount);
+            this.canManageAccount = canManage(id, this.userAccount);
             this.isOwnAccount = this.userAccount && id === this.userAccount.id;
         }
         this.account = account;
