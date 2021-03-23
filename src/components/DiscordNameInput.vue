@@ -6,12 +6,39 @@
     span.separator #
     input.text_input.discriminator_input(
         type='number', placeholder='0000', min='0', max='9999',
-        :value='discriminator',
-        @input='$emit("discriminatorInput", $event.target.value)')
+        v-model='paddedDiscriminator', @input='onDiscriminatorInput')
 </template>
 
 <script>
-export default { props: ["username", "discriminator"] };
+import { Component, Prop, Vue } from "vue-property-decorator";
+
+@Component()
+export default class EditableText extends Vue {
+    @Prop()
+    username;
+    @Prop()
+    discriminator;
+
+    paddedDiscriminator = "0000";
+
+    created() {
+        this.paddedDiscriminator = this.discriminator.toString();
+        this.padDiscriminator();
+    }
+
+    padDiscriminator() {
+        this.paddedDiscriminator = this.paddedDiscriminator
+            .toString()
+            .padStart(4, "0")
+            .slice(-4);
+        console.log(this.paddedDiscriminator);
+    }
+
+    onDiscriminatorInput() {
+        this.padDiscriminator();
+        this.$emit("discriminatorInput", this.paddedDiscriminator);
+    }
+}
 </script>
 
 <style lang="sass" scoped>

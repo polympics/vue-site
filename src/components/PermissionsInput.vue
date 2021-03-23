@@ -3,7 +3,7 @@
     label.permissions_input__flag(
             v-for='input in inputs', :key='input.id'
             :for='input.id',
-            :class='{ "permissions_input__flag--disabled": input.enabled }')
+            :class='{ "permissions_input__flag--disabled": !input.enabled }')
         input(
             type='checkbox', :id='input.id',
             @change='updateFlag(input.flag, $event.target.checked)'

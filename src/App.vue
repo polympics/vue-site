@@ -16,7 +16,7 @@ div(class='body')
 import { Component, Vue } from "vue-property-decorator";
 import NavBar from "@/components/NavBar.vue";
 import Footer from "@/components/Footer.vue";
-import { getClient, getWikiIndex } from "./js/common.js";
+import { getClient, getWikiIndex, logout } from "./js/common.js";
 
 @Component({ components: { NavBar, Footer } })
 export default class App extends Vue {
@@ -36,9 +36,15 @@ export default class App extends Vue {
     }
 
     async getAccount() {
-        const client = getClient();
+        let client = getClient();
         if (client.getSelf) {
-            this.userAccount = await client.getSelf();
+            try {
+                this.userAccount = await client.getSelf();
+            } catch (error) {
+                logout();
+                client = getClient();
+                this.userAccount = null;
+            }
         } else {
             this.userAccount = null;
         }
