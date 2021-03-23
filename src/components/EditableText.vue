@@ -43,6 +43,8 @@ export default class EditableText extends Vue {
 </script>
 
 <style lang="sass" scoped>
+@import "../sass/form.sass"
+
 .text_input
     font-size: inherit
     text-align: center

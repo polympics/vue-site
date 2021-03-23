@@ -1,0 +1,56 @@
+/** Styles for form input elements.
+@import "./_variables.sass"
+
+.text_input
+    -moz-appearance: textfield
+    margin: 0
+    border: 0
+    background: transparent
+    font-family: inherit
+    font-size: inherit
+    outline: none
+    color: $body-text
+    border-bottom: 1px solid $body-text
+    font-size: 1.1rem
+    padding-bottom: 5px
+    transition: font-size 50ms
+    &:focus
+        font-size: 1.3rem
+
+.input::-webkit-outer-spin-button, input::-webkit-inner-spin-button
+    -webkit-appearance: none
+
+.long_text_input
+    width: 100%
+
+.button
+    border: 0
+    outline: 0
+    font-family: inherit
+    font-size: inherit
+    font-weight: inherit
+    color: inherit
+    border-radius: 0.5rem
+    padding: 1rem
+    box-shadow: 2px 2px 10px 2px $body-shadow
+
+.button--enabled
+    background: $accent-gradient
+    cursor: pointer
+    transition: transform 50ms
+    &:hover
+        transform: scale(1.2)
+
+.button--disabled
+    background: $grey-accent-gradient
+    cursor: default
+
+.button--danger
+    background: $red-no
+
+.button--danger.button--disabled
+    background: scale-color($red-no, $saturation: -50%)
+
+.button--black
+    background: $bubble-bg
+    box-shadow: 2px 2px 5px 1px $body-shadow

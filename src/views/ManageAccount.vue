@@ -169,6 +169,8 @@ export default class ManageAccount extends BaseView {
 </script>
 
 <style lang="sass" scoped>
+@import "../sass/form.sass"
+
 .section_warning
     margin-bottom: 1rem
 

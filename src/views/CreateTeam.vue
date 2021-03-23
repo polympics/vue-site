@@ -1,12 +1,12 @@
 <template lang="pug">
 main.main: BubbleBox.page_content
     form.create_team_form(@submit.prevent='createTeam')
-        h1.page_intro__header Create a Team
+        h1.page_content__header Create a Team
         input.text_input#team_name_input(
             v-model='teamName', placeholder='Team name')
         input.button(
             type='submit', value='Create'
-            :class='teamName ? "button--enabled" : "button--disabled"'
+            :class='{ "button--enabled": teamName, "button--disabled": !teamName }'
         )
 </template>
 
@@ -39,8 +39,16 @@ export default class CreateTeam extends BaseView {
 
 <style lang="sass" scoped>
 @import "../sass/_variables.sass"
+@import "../sass/form.sass"
 
-.page_intro__header
+.page_content
+    max-width: 600px
+
+.page_content__header
+    padding-bottom: 5px
+    border-bottom: 3px solid
+    border-image: linear-gradient(to right, $accent-1, $accent-2) 1
+    display: inline-block
     margin: 0
     margin-bottom: 2rem
 

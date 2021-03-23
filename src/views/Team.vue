@@ -9,16 +9,6 @@ main.main.main--full
         button.button.button--danger.button--enabled(
             v-if='canManageTeam', @click='showTeamDeleteModal = true'
         ) Delete Team
-    Modal(:show='showTeamDeleteModal').delete_modal
-        h2 Delete team?
-        p
-            | You cannot undo this action. Make sure you're certain you want
-            | to delete Team "{{ team.name }}".
-        button.button.button--black.button--enabled(@click='deleteTeam')
-            | Delete
-        button.button.button--black.button--enabled(
-            @click='showTeamDeleteModal = false'
-        ) Cancel
     h3.member_count {{ team.memberCount }} members
     SearchBar(v-model='query', @input='update')
     ItemList.member_list(:paginator='members', :key='listKey')
@@ -31,6 +21,16 @@ main.main.main--full
                 @demoteMember='demoteMember',
                 @promoteMember='promoteMember',
                 @kickMember='kickMember')
+    Modal(:show='showTeamDeleteModal').delete_modal
+        h2 Delete team?
+        p
+            | You cannot undo this action. Make sure you're certain you want
+            | to delete Team "{{ team.name }}".
+        button.button.button--black.button--enabled(@click='deleteTeam')
+            | Delete
+        button.button.button--black.button--enabled(
+            @click='showTeamDeleteModal = false'
+        ) Cancel
 </template>
 
 <script>
@@ -145,6 +145,7 @@ export default class Team extends BaseView {
 
 <style lang="sass" scoped>
 @import "../sass/_variables.sass"
+@import "../sass/form.sass"
 
 .team_header
     display: flex

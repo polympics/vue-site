@@ -21,6 +21,7 @@ export default class SearchBar extends Vue {
 
 <style lang="sass" scoped>
 @import "../sass/_variables.sass"
+@import "../sass/form.sass"
 
 .search_bar
     padding: 2rem

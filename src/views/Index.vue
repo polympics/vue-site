@@ -1,11 +1,10 @@
 <template lang="pug">
 main.main.main--centered(v-emoji)
-    section.page_intro.page_intro--centered
-        img(
-            src='/img/logo.png', alt='PolyChampions Logo',
-            class='page_intro__icon')
-        h1.page_intro__header Polympics
-        p.page_intro__slogan A worldwide event to bring the Polytopia community together for a summer of fun!
+    section.page_message
+        img.page_message__icon(
+            src='/img/logo.png', alt='PolyChampions Logo')
+        h1.page_message__header Polympics
+        p.page_message__slogan A worldwide event to bring the Polytopia community together for a summer of fun!
     LinkCard(link='/login', title='Sign up')
         | Put your name down to represent your country, city or state in a summer of competetive Polytopia fun!
     LinkCard(link='/about', title='Read all about it')
@@ -27,3 +26,7 @@ export default class Index extends BaseView {
     userAccount;
 }
 </script>
+
+<style lang="sass" scoped>
+@import "../sass/message.sass"
+</style>

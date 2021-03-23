@@ -9,5 +9,7 @@ export default class BaseView extends Vue {
     userAccount;
     @Prop()
     client;
+    @Prop()
+    wikiIndex;
 }
 </script>

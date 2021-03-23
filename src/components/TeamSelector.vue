@@ -9,7 +9,7 @@
     table.teams_list(v-if='teams.length', :key='listKey')
         tr.teams_list__team(
                 v-for='team in teams', @mouseup.prevent='selectTeam(team)',
-                :class='teamSelected(team) ? "teams_list__team--selected" : ""'
+                :class='{ "teams_list__team--selected": teamSelected(team) }'
             )
             td
                 label(:for='`team_${team.id}`', v-emoji)
@@ -87,6 +87,7 @@ export default class TeamSelector extends Vue {
 
 <style lang="sass" scoped>
 @import "../sass/_variables.sass"
+@import "../sass/form.sass"
 
 .team_selector
     background: $body-bg

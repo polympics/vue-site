@@ -33,7 +33,10 @@ You should put configuration in files named `.env.production.local` and/or `.env
 |:-------------------:|:-----------------------:|:---------------------------:|
 | `BASE_URL`          | `http://127.0.0.1:8081` | Required                    |
 | `API_URL`           | `http://127.0.0.1:8000` | `https://api.polytopia.fun` |
+| `CMS_URL`           | See below.              | See below.                  |
 | `DISCORD_CLIENT_ID` | `612766643080396830`    | Required                    |
+
+The default `CMS_URL` is `https://raw.githubusercontent.com/polympics/wiki/build` (note no `index.json`).
 
 These should all be prefixed with `VUE_APP_`. Example file:
 

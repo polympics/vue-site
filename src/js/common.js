@@ -81,3 +81,22 @@ export function canManage(accountId, ownAccount) {
         canDeleteAccount
     );
 }
+
+/** Get the wiki index. */
+export async function getWikiIndex() {
+    const root = process.env.VUE_APP_CMS_URL;
+    const response = await fetch(`${root}/index.json`);
+    const index = await response.json();
+    for (const file of index.files) {
+        file.sourcePath = `${root}/${file.path}`;
+        // Remove ".html".
+        file.path = file.path.slice(0, -5).toLowerCase();
+    }
+    return index.files;
+}
+
+/** Get a page of the wiki. */
+export async function getWikiPage(file) {
+    const response = await fetch(file.sourcePath);
+    return await response.text();
+}

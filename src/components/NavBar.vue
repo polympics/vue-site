@@ -30,9 +30,12 @@
                         router-link.navbar__menu__item(
                             to='/login', v-else) Login or Signup
                     .navbar__menu
-                        span.navbar__menu__title About
-                        router-link.navbar__menu__item(to='/about') About
-                        a.navbar__menu__item(href="#") Events
+                        span.navbar__menu__title Wiki
+                        router-link.navbar__menu__item(
+                            v-for='file in wiki',
+                            v-if='file.navbar',
+                            :key='file.path',
+                            :to='`/wiki/${file.path}`') {{ file.title}}
 </template>
 
 <script>
@@ -42,6 +45,8 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 export default class NavBar extends Vue {
     @Prop()
     account;
+    @Prop()
+    wiki;
     mobile = false;
     showNavbar = true;
 

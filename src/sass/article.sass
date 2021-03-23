@@ -1,0 +1,36 @@
+/**
+    Style for a content-based page.
+    Uses HTML elements directly instead of classes because it is intended for
+    content rendered from markdown.
+@import "./_variables.sass"
+
+article
+    margin: 0 1rem 1rem 2rem
+    font-weight: 600
+    max-width: unquote("max(50vw, 600px)")
+
+::v-deep
+    h1, h2, h3
+        padding-bottom: 5px
+        border-bottom: 3px solid
+        border-image: linear-gradient(to right, $accent-1, $accent-2) 1
+        display: inline-block
+
+    h1
+        margin: 2rem 0 0 0
+        font-size: 3rem
+        font-weight: 900
+
+    h2
+        margin: 1.7rem 0 0 0
+        font-size: 2rem
+        font-weight: 900
+
+    p
+        margin: 1rem 0 0 0
+
+
+@media only screen and (max-width: 420px)
+    ::v-deep
+        h1
+            font-size: 2.5rem

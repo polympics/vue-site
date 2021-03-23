@@ -15,6 +15,8 @@ export default { props: ["username", "discriminator"] };
 </script>
 
 <style lang="sass" scoped>
+@import "../sass/form.sass"
+
 .separator
     margin: 0 0.5rem
 

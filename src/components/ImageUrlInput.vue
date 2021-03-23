@@ -12,3 +12,7 @@ input.text_input.long_text_input(
 <script>
 export default { props: ["value"] };
 </script>
+
+<style lang="sass" scoped>
+@import "../sass/form.sass"
+</style>
