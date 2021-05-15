@@ -25,12 +25,12 @@ main.main.main--centered
         :value='account.avatarUrl', @input='updateAvatarUrl',
         v-if='canChangeDetails')
     h3(v-if='canChangePermissions') Change Permissions
-    Warning.section_warning(v-if='canChangePermissions && isOwnAccount')
-        | If you revoke your own permissions you may not be able to get
-        | them back.
     PermissionsInput(
-        :value='account.permissions', @input='updatePermissions',
-        :userPermissions='userAccount.permissions' v-if='canChangePermissions')
+        :value='account.permissions',
+        :isOwnAccount='isOwnAccount'
+        :userPermissions='userAccount.permissions',
+        @input='updatePermissions',
+        v-if='canChangePermissions')
     h3(v-if='canDeleteAccount') Danger Area
     button.button.button--danger.button--enabled(
         v-if='canDeleteAccount', @click='showAccountDeleteModal = true'

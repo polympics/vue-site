@@ -30,6 +30,8 @@ function prettifyCamelCase(camelCase) {
 @Component()
 export default class PermissionsInput extends Vue {
     @Prop()
+    isOwnAccount;
+    @Prop()
     value;
     @Prop()
     userPermissions;
@@ -39,6 +41,7 @@ export default class PermissionsInput extends Vue {
         for (const flagName of flags) {
             const flag = polympics.PolympicsPermissions[flagName];
             let enabled = this.userPermissions & flag;
+            if (this.isOwnAccount) enabled = false;
             const id = `permissions__${flagName}`;
             const prettyName = prettifyCamelCase(flagName);
             if (!enabled && flagName === "manageOwnTeam") {
