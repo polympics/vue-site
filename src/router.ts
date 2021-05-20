@@ -31,7 +31,7 @@ const routes = [
     { path: "/discord_sync", component: DiscordSync },
     { path: "/discord_sync/callback", component: DiscordSyncCallback },
     { path: "/logout", component: Logout },
-    { path: "/wiki/:wikiPath", component: WikiPage },
+    { path: "/wiki/:wikiPath+", component: WikiPage },
     { path: "**", component: PageNotFound }
 ];
 
