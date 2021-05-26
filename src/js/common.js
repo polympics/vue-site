@@ -1,4 +1,5 @@
 /** JS utils common to multiple pages. */
+// import * as polympics from "polympics";
 
 /** Get a cookie. */
 export function getCookie(name) {

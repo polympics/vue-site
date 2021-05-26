@@ -13,6 +13,7 @@
 
 <script>
 import { Component, Vue, Prop } from "vue-property-decorator";
+import * as polympics from "polympics";
 
 const flags = [
     "managePermissions",
@@ -57,7 +58,7 @@ export default class PermissionsInput extends Vue {
                 id: id,
                 prettyName: prettyName,
                 flag: flag,
-                value: this.value & flag ? true : false
+                value: this.value & flag
             });
         }
         return inputs;

@@ -89,20 +89,24 @@ export default class ManageAccount extends BaseView {
 
     async created() {
         if (!this.userAccount) {
-            this.$router.push({ path: `/account/${this.$route.params.id}` });
+            await this.$router.push({
+                path: `/account/${this.$route.params.id}`
+            });
             return;
         }
         this.isOwnAccount = this.$route.params.id === this.userAccount.id;
         const manageFlags = canManage(this.$route.params.id, this.userAccount);
         if (!manageFlags) {
-            this.$router.push({ path: `/account/${this.$route.params.id}` });
+            await this.$router.push({
+                path: `/account/${this.$route.params.id}`
+            });
             return;
         }
         this.canChangeTeam = manageFlags & 1;
         this.canChangeDetails = manageFlags & (1 << 1);
         this.canChangePermissions = manageFlags & (1 << 2);
         this.canDeleteAccount = manageFlags & (1 << 3);
-        this.fetchAccount();
+        await this.fetchAccount();
     }
 
     async fetchAccount() {
@@ -112,7 +116,7 @@ export default class ManageAccount extends BaseView {
             account = await this.client.getAccount(id);
         } catch (error) {
             if (error.code === 422) {
-                this.$router.push({ path: "/404" });
+                await this.$router.push({ path: "/404" });
             }
             return;
         }
@@ -167,7 +171,7 @@ export default class ManageAccount extends BaseView {
             logout();
             this.$emit("newCredentials");
         }
-        this.$router.push({ path: "/" });
+        await this.$router.push({ path: "/" });
     }
 }
 </script>

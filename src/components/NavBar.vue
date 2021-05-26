@@ -40,6 +40,7 @@
 
 <script>
 import { Component, Prop, Vue } from "vue-property-decorator";
+import * as polympics from "polympics";
 
 @Component
 export default class NavBar extends Vue {
@@ -77,9 +78,6 @@ export default class NavBar extends Vue {
 .navbar__home
     color: $body-text
     text-decoration: none
-    text-transform: lowercase
-    font-variant: small-caps
-    font-weight: 900
     display: flex
     align-items: center
     text-transform: none
@@ -114,7 +112,6 @@ export default class NavBar extends Vue {
         position: absolute
 
     .navbar__menu
-        transition: color 0.5s
         align-items: center
         height: 1rem
         max-height: 1rem
@@ -138,9 +135,8 @@ export default class NavBar extends Vue {
             color: $navbar-text-hover
 
     .navbar__home
-        margin: 2em
         transition: color 0.5s
-        margin-right: auto
+        margin: 2em auto 2em 2em
 
 @media (hover: none)
     .navbar_mob_transition-leave-to.navbar__outer_wrapper,

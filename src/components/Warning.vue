@@ -15,6 +15,5 @@ div.warning
     max-width: 80%
 
 .warning__title
-    margin: 0
-    margin-bottom: 0.5rem
+    margin: 0 0 0.5rem
 </style>

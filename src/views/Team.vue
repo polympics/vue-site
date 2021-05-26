@@ -42,6 +42,7 @@ import SearchBar from "@/components/SearchBar.vue";
 import EditableText from "@/components/EditableText.vue";
 import AccountRow from "@/components/AccountRow.vue";
 import Modal from "@/components/Modal.vue";
+import * as polympics from "polympics";
 
 @Component({
     components: { ItemList, SearchBar, EditableText, AccountRow, Modal }
@@ -79,7 +80,7 @@ export default class Team extends BaseView {
             this.team = await this.client.getTeam(id);
         } catch (error) {
             if (error.code === 422) {
-                this.$router.push({ path: "/404" });
+                await this.$router.push({ path: "/404" });
             }
             return;
         }
@@ -116,21 +117,21 @@ export default class Team extends BaseView {
 
     async kickMember(account) {
         await this.client.updateAccount(account, { team: null });
-        this.update();
+        await this.update();
     }
 
     async promoteMember(account) {
         await this.client.updateAccount(account, {
             grantPermissions: polympics.PolympicsPermissions.manageOwnTeam
         });
-        this.update();
+        await this.update();
     }
 
     async demoteMember(account) {
         await this.client.updateAccount(account, {
             revokePermissions: polympics.PolympicsPermissions.manageOwnTeam
         });
-        this.update();
+        await this.update();
     }
 
     async deleteTeam() {
@@ -138,7 +139,7 @@ export default class Team extends BaseView {
             this.userAccount.team && this.userAccount.team.id === this.team.id;
         await this.client.deleteTeam(this.team);
         if (isOwnTeam) this.$emit("newCredentials");
-        this.$router.push({ path: "/teams" });
+        await this.$router.push({ path: "/teams" });
     }
 }
 </script>

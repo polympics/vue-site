@@ -31,7 +31,7 @@ export default class App extends Vue {
     }
 
     async getData() {
-        this.getAccount();
+        await this.getAccount();
         this.wikiIndex = await getWikiIndex();
     }
 
