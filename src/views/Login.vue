@@ -11,7 +11,7 @@ import Redirecting from "@/components/Redirecting.vue";
 export default class Login extends BaseView {
     async mounted() {
         if (this.account) {
-            this.$router.push({ path: `/account/${this.account.id}` });
+            await this.$router.push({ path: `/account/${this.account.id}` });
             return;
         }
         window.location.href =

@@ -20,7 +20,7 @@ export default class WikiPage extends BaseView {
                 return;
             }
         }
-        this.$router.push({ path: "/404" });
+        await this.$router.push({ path: "/404" });
     }
 }
 </script>

@@ -14,6 +14,7 @@ main.main: BubbleBox.page_content
 import { Component } from "vue-property-decorator";
 import BaseView from "./BaseView";
 import BubbleBox from "@/components/BubbleBox.vue";
+import * as polympics from "polympics";
 
 @Component({ components: { BubbleBox } })
 export default class CreateTeam extends BaseView {
@@ -32,7 +33,7 @@ export default class CreateTeam extends BaseView {
     async createTeam() {
         if (!this.teamName) return;
         const team = await this.client.createTeam(this.teamName);
-        this.$router.push({ path: `/team/${team.id}` });
+        await this.$router.push({ path: `/team/${team.id}` });
     }
 }
 </script>
@@ -49,8 +50,7 @@ export default class CreateTeam extends BaseView {
     border-bottom: 3px solid
     border-image: linear-gradient(to right, $accent-1, $accent-2) 1
     display: inline-block
-    margin: 0
-    margin-bottom: 2rem
+    margin: 0 0 2rem
 
 .create_team_form
     display: flex

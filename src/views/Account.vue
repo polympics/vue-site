@@ -34,7 +34,7 @@ export default class Account extends BaseView {
             account = await this.client.getAccount(id);
         } catch (error) {
             if (error.code === 422) {
-                this.$router.push({ path: "/404" });
+                await this.$router.push({ path: "/404" });
             }
             return;
         }

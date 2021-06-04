@@ -23,7 +23,7 @@ export default class LoginCallback extends BaseView {
     }
 
     async failLogin() {
-        this.$router.push({ path: "/" });
+        await this.$router.push({ path: "/" });
     }
 
     async loginWith(token) {
@@ -32,7 +32,7 @@ export default class LoginCallback extends BaseView {
         const userClient = getClient();
         const account = await userClient.getSelf();
         this.$emit("newCredentials");
-        this.$router.push({ path: `/account/${account.id}` });
+        await this.$router.push({ path: `/account/${account.id}` });
     }
 }
 </script>
