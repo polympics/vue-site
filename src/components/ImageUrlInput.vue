@@ -1,7 +1,7 @@
 <template lang="pug">
 input.text_input.long_text_input(
     type='url',
-    pattern='https?://.*\.(png|gif|jpg|jpeg|webp|apng|jfif)',
+    pattern='https?://.*',
     placeholder='Image URL',
     :value='value',
     @input='$emit("input", $event.target.value)',

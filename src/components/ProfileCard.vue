@@ -7,6 +7,12 @@ BubbleBox.account(:key='account.id')
         h1.account__name(v-emoji)
             span {{ account.name }}
             span.account__discrim !{'#'}{{ account.discriminator}}
+        .account__awards
+            AwardIcon(
+                :award='award',
+                :key='award.id',
+                v-for='award in account.awards'
+            )
         router-link.account__team(
                 :to='`/team/${account.team.id}`', v-if='account.team', v-emoji)
             | {{ account.team.name }}
@@ -17,8 +23,9 @@ BubbleBox.account(:key='account.id')
 <script>
 import { Component, Vue, Prop } from "vue-property-decorator";
 import BubbleBox from "./BubbleBox";
+import AwardIcon from "./AwardIcon.vue";
 
-@Component({ components: { BubbleBox } })
+@Component({ components: { AwardIcon, BubbleBox } })
 export default class ProfileCard extends Vue {
     @Prop()
     account;

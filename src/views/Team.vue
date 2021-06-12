@@ -9,6 +9,12 @@ main.main.main--full
         button.button.button--danger.button--enabled(
             v-if='canManageTeam', @click='showTeamDeleteModal = true'
         ) Delete Team
+    .awards
+        AwardIcon(:award='award', :key='award.id', v-for='award in team.awards')
+        router-link.awards__new(:to='`/team/${team.id}/create_award`')
+            Tooltip(text='Give Award')
+                i.fas.fa-trophy.awards__new__trophy
+                i.fas.fa-plus-square.awards__new__plus
     h3.member_count {{ team.memberCount }} members
     SearchBar(v-model='query', @input='update')
     ItemList.member_list(:paginator='members', :key='listKey')
@@ -42,9 +48,19 @@ import SearchBar from "@/components/SearchBar.vue";
 import EditableText from "@/components/EditableText.vue";
 import AccountRow from "@/components/AccountRow.vue";
 import Modal from "@/components/Modal.vue";
+import AwardIcon from "@/components/AwardIcon.vue";
+import Tooltip from "@/components/Tooltip.vue";
 
 @Component({
-    components: { ItemList, SearchBar, EditableText, AccountRow, Modal }
+    components: {
+        ItemList,
+        SearchBar,
+        EditableText,
+        AccountRow,
+        Modal,
+        AwardIcon,
+        Tooltip
+    }
 })
 export default class Team extends BaseView {
     team = {
@@ -159,9 +175,35 @@ export default class Team extends BaseView {
 .name
     font-size: 4rem
 
+.awards__new
+    color: $body-text
+    transition: 200ms linear color
+    &:hover
+        color: $disabled-text
+
 .member_count
     font-size: 1.5rem
+    margin: 0 0 0.5rem 0
 
 .delete_modal button
     margin-right: 1rem
+
+.awards
+    display: flex
+    align-items: center
+    justify-content: center
+    margin: 1.5rem 0 0.8rem 0
+
+.awards__new
+    position: relative
+
+.awards__new__trophy
+    font-size: 1.5rem
+
+.awards__new__plus
+    position: absolute
+    right: 0
+    bottom: 0
+    font-size: 0.8rem
+    text-shadow: -2px -2px 0 $body-bg, -2px 2px 0 $body-bg, 2px -2px 0 $body-bg
 </style>

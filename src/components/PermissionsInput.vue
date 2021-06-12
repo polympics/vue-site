@@ -19,7 +19,8 @@ const flags = [
     "manageAccountTeams",
     "manageAccountDetails",
     "manageTeams",
-    "manageOwnTeam"
+    "manageOwnTeam",
+    "manageAwards"
 ];
 
 function prettifyCamelCase(camelCase) {
