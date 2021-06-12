@@ -40,7 +40,6 @@
 
 <script>
 import { Component, Prop, Vue } from "vue-property-decorator";
-import * as polympics from "polympics";
 
 @Component
 export default class NavBar extends Vue {

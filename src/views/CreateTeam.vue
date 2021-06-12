@@ -14,7 +14,6 @@ main.main: BubbleBox.page_content
 import { Component } from "vue-property-decorator";
 import BaseView from "./BaseView";
 import BubbleBox from "@/components/BubbleBox.vue";
-import * as polympics from "polympics";
 
 @Component({ components: { BubbleBox } })
 export default class CreateTeam extends BaseView {

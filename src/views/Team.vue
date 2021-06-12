@@ -42,7 +42,6 @@ import SearchBar from "@/components/SearchBar.vue";
 import EditableText from "@/components/EditableText.vue";
 import AccountRow from "@/components/AccountRow.vue";
 import Modal from "@/components/Modal.vue";
-import * as polympics from "polympics";
 
 @Component({
     components: { ItemList, SearchBar, EditableText, AccountRow, Modal }

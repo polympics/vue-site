@@ -13,7 +13,6 @@
 
 <script>
 import { Component, Vue, Prop } from "vue-property-decorator";
-import * as polympics from "polympics";
 
 const flags = [
     "managePermissions",
