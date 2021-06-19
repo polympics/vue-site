@@ -15,7 +15,9 @@ main.main.main--full
             :big='true',
             :key='award.id',
             v-for='award in team.awards')
-        router-link.awards__new(:to='`/team/${team.id}/create_award`')
+        router-link.awards__new(
+                :to='`/team/${team.id}/create_award`',
+                v-if='canCreateAward')
             Tooltip(text='Give Award')
                 i.fas.fa-trophy.awards__new__trophy
                 i.fas.fa-plus-square.awards__new__plus
@@ -78,9 +80,14 @@ export default class Team extends BaseView {
     canManageTeam = false;
     canKickMembers = false;
     canPromoteMembers = false;
+    canCreateAward = false;
     showTeamDeleteModal = false;
 
     created() {
+        this.canCreateAward =
+            this.userAccount &&
+            this.userAccount.permissions &
+                polympics.PolympicsPermissions.manageAwards;
         this.update();
     }
 

@@ -31,7 +31,7 @@ export default class CreateAward extends BaseView {
             this.userAccount.permissions &
                 polympics.PolympicsPermissions.manageAwards;
         if (!canCreate) {
-            this.$router.push({ path: `/award/${this.$route.params.id}` });
+            this.$router.push({ path: `/team/${this.$route.params.id}` });
         }
         await this.fetchTeam();
     }
@@ -51,6 +51,7 @@ export default class CreateAward extends BaseView {
     }
 
     async createAward() {
+        if (!(title && imageUrl)) return;
         const award = await this.client.createAward({
             team: this.team,
             title: this.title,
