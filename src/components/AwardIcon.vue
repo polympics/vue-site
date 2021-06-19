@@ -1,5 +1,5 @@
 <template lang="pug">
-router-link.award(:to='`/award/${award.id}`')
+router-link.award(:to='`/award/${award.id}`', :class='{ "award--big": big }')
     Tooltip(:text='award.title')
         img.award__icon(
             :src='award.imageUrl',
@@ -14,14 +14,22 @@ import Tooltip from "./Tooltip";
 export default class AwardIcon extends Vue {
     @Prop()
     award;
+    @Prop({ default: false })
+    big;
 }
 </script>
 
 <style lang="sass" scoped>
 .award
-    margin: 0 0.5rem
+    margin: 0 0.2rem
 
 .award__icon
-    width: 2rem
-    height: 2rem
+    width: 1.5rem
+    height: 1.5rem
+
+.award--big
+    margin: 0 0.5rem
+    .award__icon
+        width: 2rem
+        height: 2rem
 </style>

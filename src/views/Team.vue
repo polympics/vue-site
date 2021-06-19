@@ -10,7 +10,11 @@ main.main.main--full
             v-if='canManageTeam', @click='showTeamDeleteModal = true'
         ) Delete Team
     .awards
-        AwardIcon(:award='award', :key='award.id', v-for='award in team.awards')
+        AwardIcon(
+            :award='award',
+            :big='true',
+            :key='award.id',
+            v-for='award in team.awards')
         router-link.awards__new(:to='`/team/${team.id}/create_award`')
             Tooltip(text='Give Award')
                 i.fas.fa-trophy.awards__new__trophy
@@ -18,7 +22,7 @@ main.main.main--full
     h3.member_count {{ team.memberCount }} members
     SearchBar(v-model='query', @input='update')
     ItemList.member_list(:paginator='members', :key='listKey')
-        template.test(v-slot:default='data')
+        template(v-slot:default='data')
             AccountRow(
                 :account='data.item',
                 :showPromoteButtons='canPromoteMembers',
@@ -199,10 +203,11 @@ export default class Team extends BaseView {
 
 .awards__new__trophy
     font-size: 1.5rem
+    margin: 0 0.9rem 0 0.5rem
 
 .awards__new__plus
     position: absolute
-    right: 0
+    right: 0.9rem
     bottom: 0
     font-size: 0.8rem
     text-shadow: -2px -2px 0 $body-bg, -2px 2px 0 $body-bg, 2px -2px 0 $body-bg

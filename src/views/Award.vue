@@ -12,9 +12,26 @@ main.main.main--full
             ImageUrlInput(
                 :value='award.imageUrl', @input='updateImageUrl',
                 v-if='canManageAward')
+        h2 Assign to Accounts
+        AccountSelector(
+            :client='client',
+            :exclude='award.awardees.map(account => account.id)',
+            :key='listKey',
+            @input='giveToAccount',
+            v-if='canManageAward')
         button.button.button--danger.button--enabled.award__delete_button(
             v-if='canManageAward',
             @click='showDeleteModal = true') Delete Award
+    ItemList.awardee_list(
+            :data='award.awardees',
+            :key='listKey',
+            title='Awardees')
+        template(v-slot:default='data')
+            AccountRow(
+                :account='data.item',
+                :showTeams='true',
+                :showKickButtons='canManageAward',
+                @kickMember='takeFromAccount')
     Modal(:show='showDeleteModal').delete_modal
         h2 Delete award?
         p
@@ -30,17 +47,23 @@ main.main.main--full
 <script>
 import { Component } from "vue-property-decorator";
 import BaseView from "./BaseView";
+import AccountRow from "@/components/AccountRow.vue";
 import BubbleBox from "@/components/BubbleBox.vue";
 import EditableText from "@/components/EditableText.vue";
 import ImageUrlInput from "@/components/ImageUrlInput.vue";
+import ItemList from "@/components/ItemList.vue";
 import Modal from "@/components/Modal.vue";
+import AccountSelector from "@/components/AccountSelector.vue";
 
 @Component({
     components: {
+        AccountRow,
         BubbleBox,
         EditableText,
         ImageUrlInput,
-        Modal
+        ItemList,
+        Modal,
+        AccountSelector
     }
 })
 export default class Award extends BaseView {
@@ -54,6 +77,7 @@ export default class Award extends BaseView {
     };
     canManageAward = false;
     showDeleteModal = false;
+    listKey = 0;
 
     created() {
         this.fetchAward();
@@ -74,6 +98,7 @@ export default class Award extends BaseView {
                 this.userAccount.permissions &
                 polympics.PolympicsPermissions.manageAwards;
         }
+        this.listKey += 1;
     }
 
     async updateTitle(newTitle) {
@@ -89,6 +114,16 @@ export default class Award extends BaseView {
     async deleteAward() {
         await this.client.deleteAward(this.award);
         await this.$router.push({ path: `/team/${this.award.team.id}` });
+    }
+
+    async takeFromAccount(account) {
+        await this.client.takeAward(this.award, account);
+        await this.fetchAward();
+    }
+
+    async giveToAccount(account) {
+        await this.client.giveAward(this.award, account);
+        await this.fetchAward();
     }
 }
 </script>

@@ -7,16 +7,19 @@ BubbleBox.account(:key='account.id')
         h1.account__name(v-emoji)
             span {{ account.name }}
             span.account__discrim !{'#'}{{ account.discriminator}}
-        .account__awards
-            AwardIcon(
-                :award='award',
-                :key='award.id',
-                v-for='award in account.awards'
-            )
         router-link.account__team(
                 :to='`/team/${account.team.id}`', v-if='account.team', v-emoji)
             | {{ account.team.name }}
         span.account__team.account__team--none(v-else, v-emoji) 🏳️‍🌈 No team
+        .account__award_case(v-if='account.awards.length')
+            span.account__award_case__title Trophy Case
+            .account__award_case__awards
+                AwardIcon(
+                    :award='award',
+                    :big='true',
+                    :key='award.id',
+                    v-for='award in account.awards'
+                )
         slot
 </template>
 
@@ -68,6 +71,23 @@ export default class ProfileCard extends Vue {
 
 .account__team--none
     color: $body-text
+
+.account__award_case
+    border: 1px solid $body-text
+    border-radius: 1rem
+    margin-top: 1.5rem
+    padding: 1rem 1rem 0.7rem 0.5rem
+    width: min-content
+    min-width: 8rem
+    position: relative
+
+.account__award_case__title
+    position: absolute
+    top: -0.7rem
+    left: 0.7rem
+    background: $bubble-bg
+    white-space: nowrap
+    padding: 0 0.2rem
 
 @media (max-width: 800px)
     .account

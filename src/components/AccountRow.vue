@@ -3,19 +3,20 @@ div(v-transparent)
     td.item_list__row__image
         img(:src='account.avatarUrl + "?size=64"', alt='Pfp')
     td.item_list__row__main
-        router-link(:to='`/account/${account.id}`', v-emoji)
-            | {{ account.name }}!{'#'}{{ account.discriminator }}
-        AwardIcon(
-            :award='award',
-            :key='account.id',
-            v-for='award in account.awards')
+        .name_awards_wrapper
+            router-link(:to='`/account/${account.id}`', v-emoji)
+                | {{ account.name }}!{'#'}{{ account.discriminator }}
+            AwardIcon(
+                :award='award',
+                :key='account.id',
+                v-for='award in account.awards')
     td.item_list__row__extra(v-if='showTeams')
         router-link(
                 :to='`/team/${account.team.id}`', v-if='account.team', v-emoji)
             | {{ account.team.name }}
         span(v-else, v-emoji) 🏳️‍🌈 No team
     td.item_list__row__extra(v-if='showPromoteButtons')
-        Tooltip(text='Demote', v-if='isOwnerCheck(account)')
+        Tooltip(text='Remove', v-if='isOwnerCheck(account)')
             i.fas.fa-crown.user_icon.user_icon--demote(
                 @click='$emit("demoteMember", account)')
         Tooltip(text='Promote', v-else)
@@ -74,4 +75,8 @@ export default class AccountRow extends Vue {
     transition: opacity 100ms
     &:hover
         opacity: 1
+
+.name_awards_wrapper
+    display: flex
+    align-items: center
 </style>

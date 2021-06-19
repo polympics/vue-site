@@ -34,6 +34,7 @@ export default {
     border-radius: 0.5rem
     padding: 0.5rem
     z-index: 9
+    white-space: nowrap
 
 .tooltip:hover > .tooltip__text
     display: block
