@@ -9,13 +9,15 @@ input.text_input(
 )
 span.text_uneditable(@click='makeEditable', v-else, v-emoji)
     | {{ editedValue }}
-    i.fas.fa-pencil-alt.text_uneditable__icon
+    Tooltip(text='Edit')
+        i.fas.fa-pencil-alt.text_uneditable__icon
 </template>
 
 <script>
 import { Component, Prop, Vue } from "vue-property-decorator";
+import Tooltip from "./Tooltip";
 
-@Component()
+@Component({ components: { Tooltip } })
 export default class EditableText extends Vue {
     @Prop()
     value;
@@ -47,7 +49,7 @@ export default class EditableText extends Vue {
 
 .text_input
     font-size: inherit
-    text-align: center
+    text-align: inherit
     font-weight: inherit
 
 .text_uneditable

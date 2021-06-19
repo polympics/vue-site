@@ -3,28 +3,37 @@ div(v-transparent)
     td.item_list__row__image
         img(:src='account.avatarUrl + "?size=64"', alt='Pfp')
     td.item_list__row__main
-        router-link(:to='`/account/${account.id}`', v-emoji)
-            | {{ account.name }}!{'#'}{{ account.discriminator }}
+        .name_awards_wrapper
+            router-link(:to='`/account/${account.id}`', v-emoji)
+                | {{ account.name }}!{'#'}{{ account.discriminator }}
+            AwardIcon(
+                :award='award',
+                :key='account.id',
+                v-for='award in account.awards')
     td.item_list__row__extra(v-if='showTeams')
         router-link(
                 :to='`/team/${account.team.id}`', v-if='account.team', v-emoji)
             | {{ account.team.name }}
         span(v-else, v-emoji) 🏳️‍🌈 No team
     td.item_list__row__extra(v-if='showPromoteButtons')
-        i.fas.fa-crown.user_icon.user_icon--demote(
-            @click='$emit("demoteMember", account)',
-            v-if='isOwnerCheck(account)')
-        i.fas.fa-crown.user_icon.user_icon--promote(
-            @click='$emit("promoteMember", account)', v-else)
+        Tooltip(text='Remove', v-if='isOwnerCheck(account)')
+            i.fas.fa-crown.user_icon.user_icon--demote(
+                @click='$emit("demoteMember", account)')
+        Tooltip(text='Promote', v-else)
+            i.fas.fa-crown.user_icon.user_icon--promote(
+                @click='$emit("promoteMember", account)')
     td.item_list__row__extra(v-if='showKickButtons')
-        i.fas.fa-user-slash.user_icon.user_icon--kick(
-            @click='$emit("kickMember", account)')
+        Tooltip(text='Kick')
+            i.fas.fa-user-slash.user_icon.user_icon--kick(
+                @click='$emit("kickMember", account)')
 </template>
 
 <script>
 import { Component, Prop, Vue } from "vue-property-decorator";
+import AwardIcon from "./AwardIcon.vue";
+import Tooltip from "./Tooltip.vue";
 
-@Component
+@Component({ components: { AwardIcon, Tooltip } })
 export default class AccountRow extends Vue {
     @Prop()
     account;
@@ -66,4 +75,8 @@ export default class AccountRow extends Vue {
     transition: opacity 100ms
     &:hover
         opacity: 1
+
+.name_awards_wrapper
+    display: flex
+    align-items: center
 </style>

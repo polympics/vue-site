@@ -1,5 +1,6 @@
 <template lang="pug">
 BubbleBox(:key='key')
+    h2.title(v-if='title') {{ title }}
     table.item_list
         tr.item_list__row(v-for='item in items')
             slot(v-bind:item='item')
@@ -18,16 +19,28 @@ export default class ItemList extends Vue {
     finished = false;
     currentlyFetching = false;
     key = 0;
-    @Prop()
+
+    @Prop({ default: null })
+    title;
+    // Either paginator OR data should be passed.
+    @Prop({ default: null })
     paginator;
+    @Prop({ default: () => [] })
+    data;
 
     mounted() {
-        this.fetchItems();
-        window.addEventListener("scroll", this.fetchItems);
+        if (this.paginator) {
+            this.fetchItems();
+            window.addEventListener("scroll", this.fetchItems);
+        } else {
+            this.items = this.data;
+        }
     }
 
     destroyed() {
-        window.removeEventListener("scroll", this.fetchItems);
+        if (this.paginator) {
+            window.removeEventListener("scroll", this.fetchItems);
+        }
     }
 
     async _fetchItems() {
@@ -54,6 +67,9 @@ export default class ItemList extends Vue {
 
 <style lang="sass">
 @import "../sass/_variables.sass"
+
+.title
+    text-align: center
 
 .item_list
     padding: 1rem 2rem

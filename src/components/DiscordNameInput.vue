@@ -31,7 +31,6 @@ export default class EditableText extends Vue {
             .toString()
             .padStart(4, "0")
             .slice(-4);
-        console.log(this.paddedDiscriminator);
     }
 
     onDiscriminatorInput() {
