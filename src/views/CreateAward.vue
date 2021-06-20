@@ -51,7 +51,7 @@ export default class CreateAward extends BaseView {
     }
 
     async createAward() {
-        if (!(title && imageUrl)) return;
+        if (!(self.title && self.imageUrl)) return;
         const award = await this.client.createAward({
             team: this.team,
             title: this.title,

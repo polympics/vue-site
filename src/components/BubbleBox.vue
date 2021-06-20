@@ -19,7 +19,7 @@
     .bubble:not(.page_content)
         margin: 0
         border-radius: 0
-        background: transparent
+        background: $body-bg
         border-width: 5px
         border-style: solid
         border-image: $h-accent-gradient 100% 5 100% 5
@@ -30,7 +30,7 @@
     .bubble.page_content
         margin: 0
         border-radius: 0
-        background: transparent
+        background: $body-bg
         border-width: 5px
         border-style: solid
         border-image: $h-accent-gradient 100% 5 100% 5
