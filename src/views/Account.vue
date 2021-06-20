@@ -17,6 +17,7 @@ export default class Account extends BaseView {
     account = {
         name: "Loading...",
         discriminator: "0000",
+        awards: [],
         team: {
             name: "Loading..."
         }
