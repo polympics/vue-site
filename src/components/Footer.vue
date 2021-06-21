@@ -6,7 +6,7 @@ footer.footer(v-emoji)
     | This site is still in beta, so expect to see links that don't lead anywhere and placeholder content.
     br
     br
-    a(href='https://discord.gg/HYnQQdJFeP') Join now on Discord!
+    a(href='https://discord.gg/hw8ZxnCQfw') Join now on Discord!
 </template>
 
 <style lang="sass" scoped>
