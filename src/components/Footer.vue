@@ -1,12 +1,9 @@
 <template lang="pug">
 footer.footer(v-emoji)
-    | Polympics website, by Artemis.
+    | Polympics website by Artemis with help from Legorooj. Wiki content by Espark, graphics by Vorce, Espark, THomez and Artemis.
     br
     br
-    | This site is still in beta, so expect to see links that don't lead anywhere and placeholder content.
-    br
-    br
-    a(href='https://discord.gg/hw8ZxnCQfw') Join now on Discord!
+    a(href='https://discord.gg/hw8ZxnCQfw?utm_source=polytopia.fun') Join now on Discord!
 </template>
 
 <style lang="sass" scoped>

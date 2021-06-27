@@ -137,7 +137,7 @@ export default class NavBar extends Vue {
         transition: color 0.5s
         margin: 2em auto 2em 2em
 
-@media (hover: none)
+@media (hover: none), screen and (max-width: 576px)
     .navbar_mob_transition-leave-to.navbar__outer_wrapper,
     .navbar_mob_transition-enter.navbar__outer_wrapper
         background: transparent

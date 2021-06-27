@@ -13,7 +13,7 @@ export default class WikiPage extends BaseView {
     content = "";
 
     async created() {
-        const path = this.$route.params.wikiPath.toLowerCase() || "index";
+        const path = (this.$route.params.wikiPath || "index").toLowerCase();
         for (const file of this.wikiIndex) {
             if (file.path === path) {
                 this.content = await getWikiPage(file);
