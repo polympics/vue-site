@@ -51,7 +51,9 @@ export default class NavBar extends Vue {
     showNavbar = true;
 
     created() {
-        this.mobile = window.matchMedia("(hover: none)").matches;
+        this.mobile = window.matchMedia(
+            "(hover: none), screen and (max-width: 576px)"
+        ).matches;
         this.showNavbar = !this.mobile;
     }
 
