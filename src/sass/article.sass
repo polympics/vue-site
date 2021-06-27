@@ -56,8 +56,23 @@ article
         p:first-child
             margin: 0
 
+    img
+        max-height: calc(100vh - 2rem)
 
 @media only screen and (max-width: 420px)
     ::v-deep
         h1
             font-size: 2.5rem
+
+@media only screen and (min-width: 950px)
+    ::v-deep
+        img
+            position: absolute
+            top: 0
+            right: 1rem
+            max-width: calc(300px - 2rem)
+
+@media only screen and (min-width: 1200px)
+    ::v-deep
+        img
+            max-width: calc(50vw - 5rem)
