@@ -100,7 +100,7 @@ export default class NavBar extends Vue {
     font-variant: small-caps
     font-weight: 900
 
-@media (hover: hover), screen and (min-width: 577px)
+@media screen and (min-width: 577px) and (hover: hover)
     .navbar
         display: flex
         justify-content: flex-end
