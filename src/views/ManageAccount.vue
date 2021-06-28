@@ -2,7 +2,7 @@
 main.main.main--centered
   ProfileCard(:account='account')
     router-link.button.button--discord.button--enabled.sync_button(
-            to='/discord_sync')
+            to='/discord_sync' v-if='isOwnAccount')
         i.fab.fa-discord.button__icon
         | Sync with Discord
     h3(v-if='canChangeTeam') Change Team
