@@ -1,6 +1,6 @@
 {
   "name": "polympics-web-vue",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Vue frontend for the Polympics API.",
   "repository": {
     "type": "git",

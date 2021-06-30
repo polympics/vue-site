@@ -42,7 +42,7 @@ main.main.main--centered
             | to delete {{ accountPossesive }} account.
         button.button.button--danger.button--enabled(@click='deleteAccount')
             | Delete
-        button.button.button--enabled(
+        button.button.button--accent.button--enabled(
             @click='showAccountDeleteModal = false'
         ) Cancel
 </template>

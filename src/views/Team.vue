@@ -40,7 +40,7 @@ main.main.main--full
             | to delete Team "{{ team.name }}".
         button.button.button--danger.button--enabled(@click='deleteTeam')
             | Delete
-        button.button.button--enabled(
+        button.button.button--accent.button--enabled(
             @click='showTeamDeleteModal = false'
         ) Cancel
 </template>

@@ -2,7 +2,7 @@
 main.main.main--centered(v-emoji)
     section.page_message
         img.page_message__icon(
-            src='/img/logo.png', alt='Polympics Logo')
+            src='/img/full_logo.png', alt='Polympics Logo')
         h1.page_message__header Polympics
         p.page_message__slogan A worldwide event to bring the Polytopia community together for a summer of fun!
     LinkCard(link='/login', title='Sign up')

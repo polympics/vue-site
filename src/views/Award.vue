@@ -39,7 +39,7 @@ main.main.main--full
             | to delete award "{{ award.title }}".
         button.button.button--danger.button--enabled(@click='deleteAward')
             | Delete
-        button.button.button--enabled(
+        button.button.button--accent.button--enabled(
             @click='showDeleteModal = false'
         ) Cancel
 </template>
