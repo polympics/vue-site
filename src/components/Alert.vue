@@ -12,7 +12,7 @@
     bottom: 1rem
     right: 1rem
     padding: 1rem
-    width: min(max(450px, 33vw), calc(100vw - 2rem))
+    width: min(max(450px, 33vw), calc(100vw - 10rem))
     background: $bubble-bg
     border-image: $accent-gradient 5 5
     border-width: 5px
