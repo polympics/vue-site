@@ -1,7 +1,13 @@
 /** JS utils common to multiple pages. */
 
+// Cache cookies in attempt to solve Safari infinite loading issue.
+const cookieCache = new Map();
+
 /** Get a cookie. */
 export function getCookie(name) {
+    if (cookieCache.has(name)) {
+        return cookieCache.get(name);
+    }
     const pattern = new RegExp(`^ *${name} *= *(.*)`);
     const cookies = document.cookie.split(";");
     for (const cookie of cookies) {
@@ -13,6 +19,7 @@ export function getCookie(name) {
 
 /** Set a cookie. */
 export function setCookie(name, value, { daysLasts = 30 } = {}) {
+    cookieCache.set(name, value);
     const expiresAt = new Date();
     expiresAt.setTime(expiresAt.getTime() + 1000 * 60 * 60 * 24 * daysLasts);
     document.cookie =
@@ -23,6 +30,7 @@ export function setCookie(name, value, { daysLasts = 30 } = {}) {
 /** Delete a cookie. */
 export function deleteCookie(name) {
     setCookie(name, "", { daysLasts: 0 });
+    cookieCache.delete(name);
 }
 
 /** Get the Polympics client, authenticated or unauthenticated. */

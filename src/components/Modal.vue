@@ -40,8 +40,10 @@ export default { props: ["show"] };
     justify-content: center
 
 .modal
-    background: $accent-gradient
-    border-radius: 2rem
+    background: $bubble-bg
+    border-image: $accent-gradient 10 10
+    border-width: 10px
+    border-style: solid
     padding: 2rem
     max-width: calc(100vw - 10rem)
 </style>

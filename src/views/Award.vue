@@ -37,9 +37,9 @@ main.main.main--full
         p
             | You cannot undo this action. Make sure you're certain you want
             | to delete award "{{ award.title }}".
-        button.button.button--black.button--enabled(@click='deleteAward')
+        button.button.button--danger.button--enabled(@click='deleteAward')
             | Delete
-        button.button.button--black.button--enabled(
+        button.button.button--enabled(
             @click='showDeleteModal = false'
         ) Cancel
 </template>

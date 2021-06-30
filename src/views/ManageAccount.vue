@@ -40,9 +40,9 @@ main.main.main--centered
         p
             | You cannot undo this action. Make sure you're certain you want
             | to delete {{ accountPossesive }} account.
-        button.button.button--black.button--enabled(@click='deleteAccount')
+        button.button.button--danger.button--enabled(@click='deleteAccount')
             | Delete
-        button.button.button--black.button--enabled(
+        button.button.button--enabled(
             @click='showAccountDeleteModal = false'
         ) Cancel
 </template>

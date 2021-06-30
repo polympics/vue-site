@@ -17,8 +17,11 @@ export default {
 @import "../sass/_variables.sass"
 
 .card_item
+    position: relative
     border-radius: 1rem
-    background: $accent-gradient
+    border: 10px solid #0000
+    background: $bubble-bg
+    background-clip: padding-box
     padding: 2rem
     margin: 1rem
     color: $body-text
@@ -28,6 +31,16 @@ export default {
     text-decoration: none
     display: flex
     align-items: center
+    &::after
+        position: absolute
+        top: -10px
+        left: -10px
+        bottom: -10px
+        right: -10px
+        z-index: -1
+        content: ''
+        background: $accent-gradient
+        border-radius: 1rem
     &:hover
         transform: scale(1.01, 1.01)
 

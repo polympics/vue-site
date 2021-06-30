@@ -38,9 +38,9 @@ main.main.main--full
         p
             | You cannot undo this action. Make sure you're certain you want
             | to delete Team "{{ team.name }}".
-        button.button.button--black.button--enabled(@click='deleteTeam')
+        button.button.button--danger.button--enabled(@click='deleteTeam')
             | Delete
-        button.button.button--black.button--enabled(
+        button.button.button--enabled(
             @click='showTeamDeleteModal = false'
         ) Cancel
 </template>

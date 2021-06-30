@@ -10,24 +10,43 @@ div(class='body')
           section.page_message
             i.fas.fa-spinner.fa-spin.fa-5x
     Footer
+    Alert(@closeAlert='dismissJoinAlert', v-if='showJoinAlert')
+        span Please make sure you've joined !{' '}
+        a(href='https://discord.gg/hw8ZxnCQfw?utm_source=polytopia.fun')
+            | the Discord server
+        span !{' '} or you won't be able to take part.
 </template>
 
 <script>
 import { Component, Vue } from "vue-property-decorator";
+import Alert from "@/components/Alert.vue";
 import NavBar from "@/components/NavBar.vue";
 import Footer from "@/components/Footer.vue";
-import { getClient, getWikiIndex, logout } from "./js/common.js";
+import {
+    getCookie,
+    setCookie,
+    getClient,
+    getWikiIndex,
+    logout
+} from "./js/common.js";
 
-@Component({ components: { NavBar, Footer } })
+@Component({ components: { Alert, NavBar, Footer } })
 export default class App extends Vue {
     client = null;
     userAccount = null;
     wikiIndex = [];
+    showJoinAlert = false;
 
     mounted() {
+        this.showJoinAlert = getCookie("showJoinAlert") !== "false";
         this.getData();
         // Re-fetch data every 5 minutes in case it changes elsewhere.
         window.setInterval(this.getData, 1000 * 60 * 5);
+    }
+
+    dismissJoinAlert() {
+        this.showJoinAlert = false;
+        setCookie("showJoinAlert", "false");
     }
 
     async getData() {
