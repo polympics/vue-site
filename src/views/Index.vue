@@ -6,7 +6,7 @@ main.main.main--centered(v-emoji)
         h1.page_message__header Polympics
         p.page_message__slogan A worldwide event to bring the Polytopia community together for a summer of fun!
     LinkCard(link='/login', title='Sign up')
-        | Put your name down to represent your country, city or state in a summer of competetive Polytopia fun!
+        | Put your name down & join the Discord server to represent your country, city or state in a summer of competetive Polytopia fun!
     LinkCard(link='/wiki/index', title='Read all about it')
         | Read and understand the nitty-gritty details behind the event.
     LinkCard(link='/wiki/discord', title='Join the community')
